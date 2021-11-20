@@ -1,4 +1,4 @@
-# twofiftysixsquared
+# 2Dsolang
 
 all code takes place on a 2d grid of 256x256, any character that isn't defined as a command is treated as a noop unless part of a command
 
