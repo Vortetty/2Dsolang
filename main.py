@@ -105,6 +105,70 @@ def main(stdscr: _curses.window, code):
     def updateOutputs():
         outputContent.refresh()
         codeHistoryContent.refresh()
+        
+    def scanForJumpForward():
+        match direction:
+            case DIRECTION.UP:
+                while code[pos.y][pos.x] != '|':
+                    start_time = time.time()
+                    pos.y = (pos.y - 1) % 32
+                    updateCode(True)
+                    while time.time() - start_time < 1/commandsPerSecond:
+                        pass
+            case DIRECTION.DOWN:
+                while code[pos.y][pos.x] != '|':
+                    start_time = time.time()
+                    pos.y = (pos.y + 1) % 32
+                    updateCode(True)
+                    while time.time() - start_time < 1/commandsPerSecond:
+                        pass
+            case DIRECTION.LEFT:
+                while code[pos.y][pos.x] != '|':
+                    start_time = time.time()
+                    pos.x = (pos.x - 1) % 32
+                    updateCode(True)
+                    while time.time() - start_time < 1/commandsPerSecond:
+                        pass
+            case DIRECTION.RIGHT:
+                while code[pos.y][pos.x] != '|':
+                    start_time = time.time()
+                    pos.x = (pos.x + 1) % 32
+                    updateCode(True)
+                    while time.time() - start_time < 1/commandsPerSecond:
+                        pass
+                    
+    def scanForJumpBackward():
+        match direction:
+            case DIRECTION.UP:
+                while code[pos.y][pos.x] != '|':
+                    start_time = time.time()
+                    pos.y = (pos.y + 1) % 32
+                    updateCode(True)
+                    while time.time() - start_time < 1/commandsPerSecond:
+                        pass
+            case DIRECTION.DOWN:
+                while code[pos.y][pos.x] != '|':
+                    start_time = time.time()
+                    pos.y = (pos.y - 1) % 32
+                    updateCode(True)
+                    while time.time() - start_time < 1/commandsPerSecond:
+                        pass
+            case DIRECTION.LEFT:
+                while code[pos.y][pos.x] != '|':
+                    start_time = time.time()
+                    pos.x = (pos.x + 1) % 32
+                    updateCode(True)
+                    while time.time() - start_time < 1/commandsPerSecond:
+                        pass
+            case DIRECTION.RIGHT:
+                while code[pos.y][pos.x] != '|':
+                    start_time = time.time()
+                    pos.x = (pos.x - 1) % 32
+                    updateCode(True)
+                    while time.time() - start_time < 1/commandsPerSecond:
+                        pass
+        
+        
     
     while not end:
         start_time = time.time()
@@ -130,65 +194,9 @@ def main(stdscr: _curses.window, code):
             case '\\':
                 currentMemCell = (currentMemCell - 1) % 32
             case '_':
-                match direction:
-                    case DIRECTION.UP:
-                        while code[pos.y][pos.x] != '|':
-                            start_time = time.time()
-                            pos.y = (pos.y - 1) % 32
-                            updateCode(True)
-                            while time.time() - start_time < 1/commandsPerSecond:
-                                pass
-                    case DIRECTION.DOWN:
-                        while code[pos.y][pos.x] != '|':
-                            start_time = time.time()
-                            pos.y = (pos.y + 1) % 32
-                            updateCode(True)
-                            while time.time() - start_time < 1/commandsPerSecond:
-                                pass
-                    case DIRECTION.LEFT:
-                        while code[pos.y][pos.x] != '|':
-                            start_time = time.time()
-                            pos.x = (pos.x - 1) % 32
-                            updateCode(True)
-                            while time.time() - start_time < 1/commandsPerSecond:
-                                pass
-                    case DIRECTION.RIGHT:
-                        while code[pos.y][pos.x] != '|':
-                            start_time = time.time()
-                            pos.x = (pos.x + 1) % 32
-                            updateCode(True)
-                            while time.time() - start_time < 1/commandsPerSecond:
-                                pass
+                scanForJumpForward()
             case '=':
-                match direction:
-                    case DIRECTION.UP:
-                        while code[pos.y][pos.x] != '|':
-                            start_time = time.time()
-                            pos.y = (pos.y + 1) % 32
-                            updateCode(True)
-                            while time.time() - start_time < 1/commandsPerSecond:
-                                pass
-                    case DIRECTION.DOWN:
-                        while code[pos.y][pos.x] != '|':
-                            start_time = time.time()
-                            pos.y = (pos.y - 1) % 32
-                            updateCode(True)
-                            while time.time() - start_time < 1/commandsPerSecond:
-                                pass
-                    case DIRECTION.LEFT:
-                        while code[pos.y][pos.x] != '|':
-                            start_time = time.time()
-                            pos.x = (pos.x + 1) % 32
-                            updateCode(True)
-                            while time.time() - start_time < 1/commandsPerSecond:
-                                pass
-                    case DIRECTION.RIGHT:
-                        while code[pos.y][pos.x] != '|':
-                            start_time = time.time()
-                            pos.x = (pos.x - 1) % 32
-                            updateCode(True)
-                            while time.time() - start_time < 1/commandsPerSecond:
-                                pass
+                scanForJumpBackward()
                         
                 
         match direction:
