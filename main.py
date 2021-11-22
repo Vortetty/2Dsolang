@@ -5,8 +5,16 @@ import enum
 import textwrap
 import time
 import subprocess
+import argparse
 
-subprocess.run(["kitty", "@", "set-window-title", "2Dsolang Interpreter"])
+parser = argparse.ArgumentParser()
+parser.add_argument("-c", "--commands-per-second", type=float, default=16, help="How many commands to execute per second")
+parser.add_argument("-n", "--no-kitty", type=bool, default=False, help="Disable Kitty commands")
+parser.add_argument("file", type=str, help="The file to execute")
+args = parser.parse_args()
+
+if not args.no_kitty:
+    subprocess.run(["kitty", "@", "set-window-title", "2Dsolang Interpreter"])
 
 class DIRECTION(enum.Enum):
     UP = 0
@@ -144,64 +152,71 @@ def main(stdscr: _curses.window, code):
         updateOutputs()
         
     def scanForJumpForward():
-        if direction == DIRECTION.UP:
-            while code[pos.y][pos.x] != '|':
-                start_time = time.time()
-                pos.y = (pos.y - 1) % 32
-                reRender(True)
-                while time.time() - start_time < 1/commandsPerSecond:
-                    pass
-        elif direction == DIRECTION.DOWN:
-            while code[pos.y][pos.x] != '|':
-                start_time = time.time()
-                pos.y = (pos.y + 1) % 32
-                reRender(True)
-                while time.time() - start_time < 1/commandsPerSecond:
-                    pass
-        elif direction == DIRECTION.LEFT:
-            while code[pos.y][pos.x] != '|':
-                start_time = time.time()
-                pos.x = (pos.x - 1) % 32
-                reRender(True)
-                while time.time() - start_time < 1/commandsPerSecond:
-                    pass
-        elif direction == DIRECTION.RIGHT:
-            while code[pos.y][pos.x] != '|':
-                start_time = time.time()
-                pos.x = (pos.x + 1) % 32
-                reRender(True)
-                while time.time() - start_time < 1/commandsPerSecond:
-                    pass
+        newDirection = direction
+                
+        while code[pos.y][pos.x] != '|':
+            start_time = time.time()
                     
+            if newDirection == DIRECTION.UP:
+                    pos.y = (pos.y - 1) % 32
+            elif newDirection == DIRECTION.DOWN:
+                    pos.y = (pos.y + 1) % 32
+            elif newDirection == DIRECTION.LEFT:
+                    pos.x = (pos.x - 1) % 32
+            elif newDirection == DIRECTION.RIGHT:
+                    pos.x = (pos.x + 1) % 32
+                    
+            cmd = code[pos.y][pos.x]
+            if cmd == '{':
+                newDirection = DIRECTION.UP
+            elif cmd == '}':
+                newDirection = DIRECTION.DOWN
+            elif cmd == '[':
+                newDirection = DIRECTION.LEFT
+            elif cmd == ']':
+                newDirection = DIRECTION.RIGHT
+                    
+            reRender(True)
+            while time.time() - start_time < 1/commandsPerSecond:
+                pass
+                    
+        
     def scanForJumpBackward():
-        if direction == DIRECTION.UP:
-            while code[pos.y][pos.x] != '|':
-                start_time = time.time()
-                pos.y = (pos.y + 1) % 32
-                reRender(True)
-                while time.time() - start_time < 1/commandsPerSecond:
-                    pass
-        elif direction == DIRECTION.DOWN:
-            while code[pos.y][pos.x] != '|':
-                start_time = time.time()
-                pos.y = (pos.y - 1) % 32
-                reRender(True)
-                while time.time() - start_time < 1/commandsPerSecond:
-                    pass
-        elif direction == DIRECTION.LEFT:
-            while code[pos.y][pos.x] != '|':
-                start_time = time.time()
-                pos.x = (pos.x + 1) % 32
-                reRender(True)
-                while time.time() - start_time < 1/commandsPerSecond:
-                    pass
-        elif direction == DIRECTION.RIGHT:
-            while code[pos.y][pos.x] != '|':
-                start_time = time.time()
-                pos.x = (pos.x - 1) % 32
-                reRender(True)
-                while time.time() - start_time < 1/commandsPerSecond:
-                    pass
+        newDirection = direction
+        if newDirection == DIRECTION.UP:
+            newDirection = DIRECTION.DOWN
+        elif newDirection == DIRECTION.DOWN:
+            newDirection = DIRECTION.UP
+        elif newDirection == DIRECTION.LEFT:
+            newDirection = DIRECTION.RIGHT
+        elif newDirection == DIRECTION.RIGHT:
+            newDirection = DIRECTION.LEFT
+                
+        while code[pos.y][pos.x] != '|':
+            start_time = time.time()
+                    
+            if newDirection == DIRECTION.UP:
+                    pos.y = (pos.y - 1) % 32
+            elif newDirection == DIRECTION.DOWN:
+                    pos.y = (pos.y + 1) % 32
+            elif newDirection == DIRECTION.LEFT:
+                    pos.x = (pos.x - 1) % 32
+            elif newDirection == DIRECTION.RIGHT:
+                    pos.x = (pos.x + 1) % 32
+                    
+            cmd = code[pos.y][pos.x]
+            if cmd == '{':
+                newDirection = DIRECTION.UP
+            elif cmd == '}':
+                newDirection = DIRECTION.DOWN
+            elif cmd == '[':
+                newDirection = DIRECTION.LEFT
+            elif cmd == ']':
+                newDirection = DIRECTION.RIGHT
+                    
+            reRender(True)
+            while time.time() - start_time < 1/commandsPerSecond:
+                pass
     
     while not end:
         start_time = time.time()
@@ -246,7 +261,7 @@ def main(stdscr: _curses.window, code):
         while time.time() - start_time < 1/commandsPerSecond:
             pass
 
-fp = "basics.2dl" #input("Enter file path >>> ")
+fp = args.file
 f = open(fp, "r")
 source = [
     [" " for x in range(32)] for y in range(32)

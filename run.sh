@@ -9,7 +9,7 @@ then
         read -r -p "Would you like to try to launch in this terminal? (may not work properly if terminal is too small)\n [y/N] >>> " response1
         if [[ "$response1" =~ ^([yY][eE][sS]|[yY])$ ]]
         then
-            python3 ./main.py
+            python3 ./main.py -n "$@"
             exit 0
         else
             exit 0
@@ -54,4 +54,4 @@ kitty \
     -o font_size=11 \
     -o tab_bar_style=hidden \
     -d="$DIR" \
-    python3 ./main.py &
+    python3 ./main.py "$@" &
