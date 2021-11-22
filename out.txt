@@ -1,0 +1,816 @@
+Requirement already satisfied: aiohttp>=3.7.4.post0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 1)) (3.7.4.post0)
+Collecting aiohttp>=3.7.4.post0
+  Using cached aiohttp-3.8.1-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl (1.2 MB)
+Requirement already satisfied: alabaster>=0.7.12 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 2)) (0.7.12)
+Collecting alabaster>=0.7.12
+  Using cached alabaster-0.7.12-py2.py3-none-any.whl (14 kB)
+Requirement already satisfied: anytree>=2.8.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 3)) (2.8.0)
+Collecting anytree>=2.8.0
+  Using cached anytree-2.8.0-py2.py3-none-any.whl (41 kB)
+Requirement already satisfied: apparmor>=3.0.3 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 4)) (3.0.3)
+Requirement already satisfied: appdirs>=1.4.4 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 5)) (1.4.4)
+Collecting appdirs>=1.4.4
+  Using cached appdirs-1.4.4-py2.py3-none-any.whl (9.6 kB)
+Requirement already satisfied: argon2-cffi>=21.1.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 6)) (21.1.0)
+Collecting argon2-cffi>=21.1.0
+  Using cached argon2_cffi-21.1.0-cp35-abi3-manylinux_2_5_x86_64.manylinux1_x86_64.whl (96 kB)
+Requirement already satisfied: astroid>=2.8.2 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 7)) (2.8.2)
+Collecting astroid>=2.8.2
+  Using cached astroid-2.9.0-py3-none-any.whl (250 kB)
+Requirement already satisfied: async-timeout>=3.0.1 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 8)) (3.0.1)
+Collecting async-timeout>=3.0.1
+  Using cached async_timeout-4.0.1-py3-none-any.whl (5.7 kB)
+Requirement already satisfied: attrs>=21.2.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 9)) (21.2.0)
+Collecting attrs>=21.2.0
+  Using cached attrs-21.2.0-py2.py3-none-any.whl (53 kB)
+Requirement already satisfied: Babel>=2.9.1 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 10)) (2.9.1)
+Collecting Babel>=2.9.1
+  Using cached Babel-2.9.1-py2.py3-none-any.whl (8.8 MB)
+Requirement already satisfied: backcall>=0.2.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 11)) (0.2.0)
+Collecting backcall>=0.2.0
+  Using cached backcall-0.2.0-py2.py3-none-any.whl (11 kB)
+Requirement already satisfied: bcrypt>=3.2.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 12)) (3.2.0)
+Collecting bcrypt>=3.2.0
+  Using cached bcrypt-3.2.0-cp36-abi3-manylinux2010_x86_64.whl (63 kB)
+Requirement already satisfied: Beaker>=1.11.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 13)) (1.11.0)
+Collecting Beaker>=1.11.0
+  Using cached Beaker-1.11.0.tar.gz (40 kB)
+Requirement already satisfied: beautifulsoup4>=4.9.3 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 14)) (4.9.3)
+Collecting beautifulsoup4>=4.9.3
+  Using cached beautifulsoup4-4.10.0-py3-none-any.whl (97 kB)
+Requirement already satisfied: bidict>=0.21.3 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 15)) (0.21.3)
+Collecting bidict>=0.21.3
+  Using cached bidict-0.21.4-py3-none-any.whl (36 kB)
+Requirement already satisfied: binwalk>=2.3.3 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 16)) (2.3.3)
+Requirement already satisfied: bleach>=4.1.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 17)) (4.1.0)
+Collecting bleach>=4.1.0
+  Using cached bleach-4.1.0-py2.py3-none-any.whl (157 kB)
+Requirement already satisfied: bottle>=0.12.19 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 18)) (0.12.19)
+Collecting bottle>=0.12.19
+  Using cached bottle-0.12.19-py3-none-any.whl (89 kB)
+Requirement already satisfied: breezy>=3.2.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 19)) (3.2.0)
+Collecting breezy>=3.2.0
+  Using cached breezy-3.2.1.tar.gz (9.4 MB)
+Requirement already satisfied: Brlapi>=0.8.3 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 20)) (0.8.3)
+Requirement already satisfied: Brotli>=1.0.9 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 21)) (1.0.9)
+Collecting Brotli>=1.0.9
+  Using cached Brotli-1.0.9-cp39-cp39-manylinux1_x86_64.whl (357 kB)
+Requirement already satisfied: btrfsutil>=5.14.2 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 22)) (5.14.2)
+Requirement already satisfied: CacheControl>=0.12.6 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 23)) (0.12.6)
+Collecting CacheControl>=0.12.6
+  Using cached CacheControl-0.12.10-py2.py3-none-any.whl (20 kB)
+Requirement already satisfied: cbor2>=5.4.2 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 24)) (5.4.2)
+Collecting cbor2>=5.4.2
+  Using cached cbor2-5.4.2-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (222 kB)
+Requirement already satisfied: ccsm>=0.9.14.1 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 25)) (0.9.14.1)
+Requirement already satisfied: ceph>=1.0.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 26)) (1.0.0)
+Requirement already satisfied: ceph-volume>=1.0.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 27)) (1.0.0)
+Requirement already satisfied: cephfs>=2.0.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 28)) (2.0.0)
+Requirement already satisfied: cephfs-shell>=0.0.1 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 29)) (0.0.1)
+Requirement already satisfied: certifi>=2021.10.8 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 30)) (2021.10.8)
+Collecting certifi>=2021.10.8
+  Using cached certifi-2021.10.8-py2.py3-none-any.whl (149 kB)
+Requirement already satisfied: cffi>=1.15.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 31)) (1.15.0)
+Collecting cffi>=1.15.0
+  Using cached cffi-1.15.0-cp39-cp39-manylinux_2_12_x86_64.manylinux2010_x86_64.whl (444 kB)
+Requirement already satisfied: chardet>=4.0.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 32)) (4.0.0)
+Collecting chardet>=4.0.0
+  Using cached chardet-4.0.0-py2.py3-none-any.whl (178 kB)
+Requirement already satisfied: chempy>=0.8.1 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 33)) (0.8.1)
+Collecting chempy>=0.8.1
+  Using cached chempy-0.8.2.tar.gz (406 kB)
+Requirement already satisfied: chrome-gnome-shell>=0.0.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 34)) (0.0.0)
+Requirement already satisfied: click>=8.0.1 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 35)) (8.0.1)
+Collecting click>=8.0.1
+  Using cached click-8.0.3-py3-none-any.whl (97 kB)
+Requirement already satisfied: colorama>=0.4.4 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 36)) (0.4.4)
+Collecting colorama>=0.4.4
+  Using cached colorama-0.4.4-py2.py3-none-any.whl (16 kB)
+Requirement already satisfied: command-runner>=1.2.1 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 37)) (1.2.1)
+Collecting command-runner>=1.2.1
+  Using cached command_runner-1.3.0-py3-none-any.whl (17 kB)
+Requirement already satisfied: compizconfig-python>=0.9.14.1 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 38)) (0.9.14.1)
+Requirement already satisfied: configobj>=5.1.0.dev0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 39)) (5.1.0.dev0)
+Requirement already satisfied: contextlib2>=0.6.0.post1 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 40)) (0.6.0.post1)
+Collecting contextlib2>=0.6.0.post1
+  Using cached contextlib2-21.6.0-py2.py3-none-any.whl (13 kB)
+Requirement already satisfied: coverage>=5.5 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 41)) (5.5)
+Collecting coverage>=5.5
+  Using cached coverage-6.1.2-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl (214 kB)
+Requirement already satisfied: crypto>=1.4.1 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 42)) (1.4.1)
+Collecting crypto>=1.4.1
+  Using cached crypto-1.4.1-py2.py3-none-any.whl (18 kB)
+Requirement already satisfied: cryptography>=35.0.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 43)) (35.0.0)
+Collecting cryptography>=35.0.0
+  Using cached cryptography-35.0.0-cp36-abi3-manylinux_2_24_x86_64.whl (3.5 MB)
+Requirement already satisfied: CURandRTC>=0.1.7 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 44)) (0.1.7)
+Collecting CURandRTC>=0.1.7
+  Using cached CURandRTC-0.1.7-py3-none-any.whl (75 kB)
+Requirement already satisfied: cycler>=0.10.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 45)) (0.10.0)
+Collecting cycler>=0.10.0
+  Using cached cycler-0.11.0-py3-none-any.whl (6.4 kB)
+Requirement already satisfied: Cython>=0.29.24 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 46)) (0.29.24)
+Collecting Cython>=0.29.24
+  Using cached Cython-0.29.24-cp39-cp39-manylinux1_x86_64.whl (1.9 MB)
+Requirement already satisfied: debugpy>=1.4.3 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 47)) (1.4.3)
+Collecting debugpy>=1.4.3
+  Using cached debugpy-1.5.1-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl (1.9 MB)
+Requirement already satisfied: decorator>=5.1.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 48)) (5.1.0)
+Collecting decorator>=5.1.0
+  Using cached decorator-5.1.0-py3-none-any.whl (9.1 kB)
+Requirement already satisfied: defusedxml>=0.7.1 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 49)) (0.7.1)
+Collecting defusedxml>=0.7.1
+  Using cached defusedxml-0.7.1-py2.py3-none-any.whl (25 kB)
+Requirement already satisfied: discord.py-self>=1.9.1 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 50)) (1.9.1)
+Collecting discord.py-self>=1.9.1
+  Using cached discord.py_self-1.9.1-py3-none-any.whl (788 kB)
+Requirement already satisfied: distlib>=0.3.3 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 51)) (0.3.3)
+Collecting distlib>=0.3.3
+  Using cached distlib-0.3.3-py2.py3-none-any.whl (496 kB)
+Requirement already satisfied: distro>=1.6.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 52)) (1.6.0)
+Collecting distro>=1.6.0
+  Using cached distro-1.6.0-py2.py3-none-any.whl (19 kB)
+Requirement already satisfied: dnspython>=2.1.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 53)) (2.1.0)
+Collecting dnspython>=2.1.0
+  Using cached dnspython-2.1.0-py3-none-any.whl (241 kB)
+Requirement already satisfied: docutils>=0.17.1 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 54)) (0.17.1)
+Collecting docutils>=0.17.1
+  Using cached docutils-0.18-py2.py3-none-any.whl (569 kB)
+Requirement already satisfied: dot2tex>=2.11.3 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 55)) (2.11.3)
+Collecting dot2tex>=2.11.3
+  Using cached dot2tex-2.11.3-py2.py3-none-any.whl (36 kB)
+Requirement already satisfied: elevate>=0.1.3 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 56)) (0.1.3)
+Collecting elevate>=0.1.3
+  Using cached elevate-0.1.3.tar.gz (2.9 kB)
+Requirement already satisfied: entrypoints>=0.3 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 57)) (0.3)
+Collecting entrypoints>=0.3
+  Using cached entrypoints-0.3-py2.py3-none-any.whl (11 kB)
+Requirement already satisfied: evdev>=1.4.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 58)) (1.4.0)
+Collecting evdev>=1.4.0
+  Using cached evdev-1.4.0.tar.gz (26 kB)
+Requirement already satisfied: Flask>=2.0.1 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 59)) (2.0.1)
+Collecting Flask>=2.0.1
+  Using cached Flask-2.0.2-py3-none-any.whl (95 kB)
+Requirement already satisfied: Flask-Compress>=1.10.1 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 60)) (1.10.1)
+Collecting Flask-Compress>=1.10.1
+  Using cached Flask_Compress-1.10.1-py3-none-any.whl (7.9 kB)
+Requirement already satisfied: Flask-SocketIO>=5.1.1 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 61)) (5.1.1)
+Collecting Flask-SocketIO>=5.1.1
+  Using cached Flask_SocketIO-5.1.1-py3-none-any.whl (17 kB)
+Requirement already satisfied: future>=0.18.2 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 62)) (0.18.2)
+Collecting future>=0.18.2
+  Using cached future-0.18.2.tar.gz (829 kB)
+Requirement already satisfied: gdbgui>=0.15.0.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 63)) (0.15.0.0)
+Collecting gdbgui>=0.15.0.0
+  Using cached gdbgui-0.15.0.1-py3-none-any.whl (1.3 MB)
+Requirement already satisfied: Glances>=3.2.2 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 64)) (3.2.2)
+Collecting Glances>=3.2.2
+  Using cached Glances-3.2.4.1-py3-none-any.whl (1.6 MB)
+Requirement already satisfied: html5lib>=1.1 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 65)) (1.1)
+Collecting html5lib>=1.1
+  Using cached html5lib-1.1-py2.py3-none-any.whl (112 kB)
+Requirement already satisfied: htmlmin>=0.1.12 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 66)) (0.1.12)
+Collecting htmlmin>=0.1.12
+  Using cached htmlmin-0.1.12.tar.gz (19 kB)
+Requirement already satisfied: idna>=3.2 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 67)) (3.2)
+Collecting idna>=3.2
+  Using cached idna-3.3-py3-none-any.whl (61 kB)
+Requirement already satisfied: imagesize>=1.2.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 68)) (1.2.0)
+Collecting imagesize>=1.2.0
+  Using cached imagesize-1.3.0-py2.py3-none-any.whl (5.2 kB)
+Requirement already satisfied: inotify-simple>=1.3.5 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 69)) (1.3.5)
+Collecting inotify-simple>=1.3.5
+  Using cached inotify_simple-1.3.5.tar.gz (9.7 kB)
+Requirement already satisfied: iotop>=0.6 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 70)) (0.6)
+Requirement already satisfied: ipykernel>=6.4.1 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 71)) (6.4.1)
+Collecting ipykernel>=6.4.1
+  Using cached ipykernel-6.5.1-py3-none-any.whl (125 kB)
+Requirement already satisfied: ipython>=7.28.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 72)) (7.28.0)
+Collecting ipython>=7.28.0
+  Using cached ipython-7.29.0-py3-none-any.whl (790 kB)
+Requirement already satisfied: ipython-genutils>=0.2.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 73)) (0.2.0)
+Collecting ipython-genutils>=0.2.0
+  Using cached ipython_genutils-0.2.0-py2.py3-none-any.whl (26 kB)
+Requirement already satisfied: isc>=2.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 74)) (2.0)
+Requirement already satisfied: isort>=5.9.3 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 75)) (5.9.3)
+Collecting isort>=5.9.3
+  Using cached isort-5.10.1-py3-none-any.whl (103 kB)
+Requirement already satisfied: itsdangerous>=2.0.1 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 76)) (2.0.1)
+Collecting itsdangerous>=2.0.1
+  Using cached itsdangerous-2.0.1-py3-none-any.whl (18 kB)
+Requirement already satisfied: jedi>=0.18.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 77)) (0.18.0)
+Collecting jedi>=0.18.0
+  Using cached jedi-0.18.1-py2.py3-none-any.whl (1.6 MB)
+Requirement already satisfied: Jinja2>=3.0.2 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 78)) (3.0.2)
+Collecting Jinja2>=3.0.2
+  Using cached Jinja2-3.0.3-py3-none-any.whl (133 kB)
+Requirement already satisfied: jsonschema>=3.2.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 79)) (3.2.0)
+Collecting jsonschema>=3.2.0
+  Using cached jsonschema-4.2.1-py3-none-any.whl (69 kB)
+Requirement already satisfied: jupyter-client>=7.0.3 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 80)) (7.0.3)
+Collecting jupyter-client>=7.0.3
+  Using cached jupyter_client-7.0.6-py3-none-any.whl (125 kB)
+Requirement already satisfied: jupyter-core>=4.8.1 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 81)) (4.8.1)
+Collecting jupyter-core>=4.8.1
+  Using cached jupyter_core-4.9.1-py3-none-any.whl (86 kB)
+Requirement already satisfied: jupyterlab-pygments>=0.1.2 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 82)) (0.1.2)
+Collecting jupyterlab-pygments>=0.1.2
+  Using cached jupyterlab_pygments-0.1.2-py2.py3-none-any.whl (4.6 kB)
+Requirement already satisfied: kiwisolver>=1.3.2 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 83)) (1.3.2)
+Collecting kiwisolver>=1.3.2
+  Using cached kiwisolver-1.3.2-cp39-cp39-manylinux_2_12_x86_64.manylinux2010_x86_64.whl (1.6 MB)
+Requirement already satisfied: lazy-object-proxy>=1.6.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 84)) (1.6.0)
+Collecting lazy-object-proxy>=1.6.0
+  Using cached lazy_object_proxy-1.6.0-cp39-cp39-manylinux1_x86_64.whl (57 kB)
+Requirement already satisfied: legendary-gl>=0.20.18 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 85)) (0.20.18)
+Collecting legendary-gl>=0.20.18
+  Using cached legendary_gl-0.20.18-py3-none-any.whl (115 kB)
+Requirement already satisfied: lensfun>=0.3.95 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 86)) (0.3.95)
+Requirement already satisfied: LibAppArmor>=3.0.3 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 87)) (3.0.3)
+Requirement already satisfied: libfdt>=1.6.1 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 88)) (1.6.1)
+Requirement already satisfied: libtorrent>==1.2.14-build-libtorrent-rasterbar-src-libtorrent-rasterbar-1.2.14-bindings-python in /usr/lib/python3.9/site-packages (from -r installed.txt (line 89)) (1.2.14-build-libtorrent-rasterbar-src-libtorrent-rasterbar-1.2.14-bindings-python)
+Requirement already satisfied: linkify-it-py>=1.0.1 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 90)) (1.0.1)
+Collecting linkify-it-py>=1.0.1
+  Using cached linkify_it_py-1.0.2-py3-none-any.whl (19 kB)
+Requirement already satisfied: lit>=12.0.1.dev0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 91)) (12.0.1.dev0)
+Collecting lit>=12.0.1.dev0
+  Using cached lit-13.0.0.tar.gz (125 kB)
+Requirement already satisfied: llvmlite>=0.37.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 92)) (0.37.0)
+Collecting llvmlite>=0.37.0
+  Using cached llvmlite-0.37.0-cp39-cp39-manylinux2014_x86_64.whl (26.3 MB)
+Requirement already satisfied: louis>=3.19.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 93)) (3.19.0)
+Requirement already satisfied: lutris>=0.5.8.4 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 94)) (0.5.8.4)
+Requirement already satisfied: lxml>=4.6.3 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 95)) (4.6.3)
+Collecting lxml>=4.6.3
+  Using cached lxml-4.6.4-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.manylinux_2_24_x86_64.whl (6.9 MB)
+Requirement already satisfied: Mako>=1.1.5 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 96)) (1.1.5)
+Collecting Mako>=1.1.5
+  Using cached Mako-1.1.6-py2.py3-none-any.whl (75 kB)
+Requirement already satisfied: mallard-ducktype>=1.0.2 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 97)) (1.0.2)
+Collecting mallard-ducktype>=1.0.2
+  Using cached mallard_ducktype-1.0.2-py3-none-any.whl (93 kB)
+Requirement already satisfied: Markdown>=3.3.4 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 98)) (3.3.4)
+Collecting Markdown>=3.3.4
+  Using cached Markdown-3.3.6-py3-none-any.whl (97 kB)
+Requirement already satisfied: markdown-it-py>=1.1.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 99)) (1.1.0)
+Collecting markdown-it-py>=1.1.0
+  Using cached markdown_it_py-1.1.0-py3-none-any.whl (83 kB)
+Requirement already satisfied: MarkupSafe>=2.0.1 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 100)) (2.0.1)
+Collecting MarkupSafe>=2.0.1
+  Using cached MarkupSafe-2.0.1-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl (30 kB)
+Requirement already satisfied: matplotlib>=3.4.3 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 101)) (3.4.3)
+Collecting matplotlib>=3.4.3
+  Using cached matplotlib-3.5.0-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.whl (11.2 MB)
+Requirement already satisfied: matplotlib-inline>=0.1.2 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 102)) (0.1.2)
+Collecting matplotlib-inline>=0.1.2
+  Using cached matplotlib_inline-0.1.3-py3-none-any.whl (8.2 kB)
+Requirement already satisfied: mccabe>=0.6.1 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 103)) (0.6.1)
+Collecting mccabe>=0.6.1
+  Using cached mccabe-0.6.1-py2.py3-none-any.whl (8.6 kB)
+Requirement already satisfied: mercurial>=5.9.2 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 104)) (5.9.2)
+Collecting mercurial>=5.9.2
+  Using cached mercurial-5.9.3.tar.gz (8.1 MB)
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+    Preparing wheel metadata: started
+    Preparing wheel metadata: finished with status 'done'
+Requirement already satisfied: meson>=0.59.2 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 105)) (0.59.2)
+Collecting meson>=0.59.2
+  Using cached meson-0.60.1-py3-none-any.whl (837 kB)
+Requirement already satisfied: mistune>=0.8.4 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 106)) (0.8.4)
+Collecting mistune>=0.8.4
+  Using cached mistune-0.8.4-py2.py3-none-any.whl (16 kB)
+Requirement already satisfied: mock>=3.0.5 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 107)) (3.0.5)
+Collecting mock>=3.0.5
+  Using cached mock-4.0.3-py3-none-any.whl (28 kB)
+Requirement already satisfied: more-itertools>=8.10.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 108)) (8.10.0)
+Collecting more-itertools>=8.10.0
+  Using cached more_itertools-8.11.0-py3-none-any.whl (54 kB)
+Requirement already satisfied: mpmath>=1.2.1 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 109)) (1.2.1)
+Collecting mpmath>=1.2.1
+  Using cached mpmath-1.2.1-py3-none-any.whl (532 kB)
+Requirement already satisfied: msgpack>=1.0.2 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 110)) (1.0.2)
+Collecting msgpack>=1.0.2
+  Using cached msgpack-1.0.2-cp39-cp39-manylinux1_x86_64.whl (294 kB)
+Requirement already satisfied: multidict>=5.1.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 111)) (5.1.0)
+Collecting multidict>=5.1.0
+  Using cached multidict-5.2.0-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl (174 kB)
+Requirement already satisfied: Naked>=0.1.31 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 112)) (0.1.31)
+Collecting Naked>=0.1.31
+  Using cached Naked-0.1.31-py2.py3-none-any.whl (590 kB)
+Requirement already satisfied: nbclient>=0.5.4 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 113)) (0.5.4)
+Collecting nbclient>=0.5.4
+  Using cached nbclient-0.5.9-py3-none-any.whl (69 kB)
+Requirement already satisfied: nbconvert>=6.1.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 114)) (6.1.0)
+Collecting nbconvert>=6.1.0
+  Using cached nbconvert-6.3.0-py3-none-any.whl (556 kB)
+Requirement already satisfied: nbformat>=5.1.3 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 115)) (5.1.3)
+Collecting nbformat>=5.1.3
+  Using cached nbformat-5.1.3-py3-none-any.whl (178 kB)
+Requirement already satisfied: nest-asyncio>=1.5.1 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 116)) (1.5.1)
+Collecting nest-asyncio>=1.5.1
+  Using cached nest_asyncio-1.5.1-py3-none-any.whl (5.0 kB)
+Requirement already satisfied: netsnmp-python>=1.0a1 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 117)) (1.0a1)
+Requirement already satisfied: nose>=1.3.7 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 118)) (1.3.7)
+Collecting nose>=1.3.7
+  Using cached nose-1.3.7-py3-none-any.whl (154 kB)
+Requirement already satisfied: notebook>=6.4.4 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 119)) (6.4.4)
+Collecting notebook>=6.4.4
+  Using cached notebook-6.4.6-py3-none-any.whl (9.9 MB)
+Requirement already satisfied: npyscreen>=4.10.5 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 120)) (4.10.5)
+Collecting npyscreen>=4.10.5
+  Using cached npyscreen-4.10.5.tar.gz (94 kB)
+Requirement already satisfied: numba>=0.54.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 121)) (0.54.0)
+Collecting numba>=0.54.0
+  Using cached numba-0.54.1-cp39-cp39-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (3.3 MB)
+Requirement already satisfied: numpy>=1.21.2 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 122)) (1.21.2)
+Collecting numpy>=1.21.2
+  Using cached numpy-1.21.4-cp39-cp39-manylinux_2_12_x86_64.manylinux2010_x86_64.whl (15.7 MB)
+Requirement already satisfied: oauthlib>=2.0.1 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 123)) (2.0.1)
+Collecting oauthlib>=2.0.1
+  Using cached oauthlib-3.1.1-py2.py3-none-any.whl (146 kB)
+Requirement already satisfied: opencv-python>=4.5.3.56 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 124)) (4.5.3.56)
+Collecting opencv-python>=4.5.3.56
+  Using cached opencv_python-4.5.4.58-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (60.3 MB)
+Requirement already satisfied: opengraph>=0.5 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 125)) (0.5)
+Collecting opengraph>=0.5
+  Using cached opengraph-0.5.tar.gz (3.6 kB)
+Requirement already satisfied: ordered-set>=4.0.2 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 126)) (4.0.2)
+Collecting ordered-set>=4.0.2
+  Using cached ordered-set-4.0.2.tar.gz (10 kB)
+Requirement already satisfied: packaging>=20.9 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 127)) (20.9)
+Collecting packaging>=20.9
+  Using cached packaging-21.3-py3-none-any.whl (40 kB)
+Requirement already satisfied: pacman-mirrors>=4.21.5 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 128)) (4.21.5)
+Requirement already satisfied: pandocfilters>=1.5.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 129)) (1.5.0)
+Collecting pandocfilters>=1.5.0
+  Using cached pandocfilters-1.5.0-py2.py3-none-any.whl (8.7 kB)
+Requirement already satisfied: parso>=0.8.2 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 130)) (0.8.2)
+Collecting parso>=0.8.2
+  Using cached parso-0.8.2-py2.py3-none-any.whl (94 kB)
+Requirement already satisfied: patiencediff>=0.2.2 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 131)) (0.2.2)
+Collecting patiencediff>=0.2.2
+  Using cached patiencediff-0.2.2.tar.gz (28 kB)
+Requirement already satisfied: pbr>=5.6.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 132)) (5.6.0)
+Collecting pbr>=5.6.0
+  Using cached pbr-5.8.0-py2.py3-none-any.whl (112 kB)
+Requirement already satisfied: pep517>=0.11.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 133)) (0.11.0)
+Collecting pep517>=0.11.0
+  Using cached pep517-0.12.0-py2.py3-none-any.whl (19 kB)
+Requirement already satisfied: pexpect>=4.8.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 134)) (4.8.0)
+Collecting pexpect>=4.8.0
+  Using cached pexpect-4.8.0-py2.py3-none-any.whl (59 kB)
+Requirement already satisfied: pickleshare>=0.7.5 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 135)) (0.7.5)
+Collecting pickleshare>=0.7.5
+  Using cached pickleshare-0.7.5-py2.py3-none-any.whl (6.9 kB)
+Requirement already satisfied: Pillow>=8.3.2 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 136)) (8.3.2)
+Collecting Pillow>=8.3.2
+  Using cached Pillow-8.4.0-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.1 MB)
+Requirement already satisfied: Pint>=0.17 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 137)) (0.17)
+Collecting Pint>=0.17
+  Using cached Pint-0.18-py2.py3-none-any.whl (209 kB)
+Requirement already satisfied: platformdirs>=2.0.2 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 138)) (2.0.2)
+Collecting platformdirs>=2.0.2
+  Using cached platformdirs-2.4.0-py3-none-any.whl (14 kB)
+Requirement already satisfied: ply>=3.11 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 139)) (3.11)
+Collecting ply>=3.11
+  Using cached ply-3.11-py2.py3-none-any.whl (49 kB)
+Requirement already satisfied: progress>=1.5 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 140)) (1.5)
+Collecting progress>=1.5
+  Using cached progress-1.6.tar.gz (7.8 kB)
+Requirement already satisfied: prometheus-client>=0.11.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 141)) (0.11.0)
+Collecting prometheus-client>=0.11.0
+  Using cached prometheus_client-0.12.0-py2.py3-none-any.whl (57 kB)
+Requirement already satisfied: prompt-toolkit>=3.0.20 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 142)) (3.0.20)
+Collecting prompt-toolkit>=3.0.20
+  Using cached prompt_toolkit-3.0.22-py3-none-any.whl (374 kB)
+Requirement already satisfied: psutil>=5.8.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 143)) (5.8.0)
+Collecting psutil>=5.8.0
+  Using cached psutil-5.8.0-cp39-cp39-manylinux2010_x86_64.whl (293 kB)
+Requirement already satisfied: ptyprocess>=0.7.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 144)) (0.7.0)
+Collecting ptyprocess>=0.7.0
+  Using cached ptyprocess-0.7.0-py2.py3-none-any.whl (13 kB)
+Requirement already satisfied: PuLP>=2.5.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 145)) (2.5.0)
+Collecting PuLP>=2.5.0
+  Using cached PuLP-2.5.1-py3-none-any.whl (41.2 MB)
+Requirement already satisfied: pwquality>=1.4.4 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 146)) (1.4.4)
+Requirement already satisfied: pybind11>=2.8.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 147)) (2.8.0)
+Collecting pybind11>=2.8.0
+  Using cached pybind11-2.8.1-py2.py3-none-any.whl (208 kB)
+Requirement already satisfied: pycairo>=1.20.1 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 148)) (1.20.1)
+Collecting pycairo>=1.20.1
+  Using cached pycairo-1.20.1-cp39-cp39-linux_x86_64.whl
+Requirement already satisfied: pycodestyle>=2.7.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 149)) (2.7.0)
+Collecting pycodestyle>=2.7.0
+  Using cached pycodestyle-2.8.0-py2.py3-none-any.whl (42 kB)
+Requirement already satisfied: pycparser>=2.20 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 150)) (2.20)
+Collecting pycparser>=2.20
+  Using cached pycparser-2.21-py2.py3-none-any.whl (118 kB)
+Requirement already satisfied: pyevtk>=1.4.1 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 151)) (1.4.1)
+Collecting pyevtk>=1.4.1
+  Using cached pyevtk-1.4.1-py3-none-any.whl (18 kB)
+Requirement already satisfied: pyflakes>=2.3.1 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 152)) (2.3.1)
+Collecting pyflakes>=2.3.1
+  Using cached pyflakes-2.4.0-py2.py3-none-any.whl (69 kB)
+Requirement already satisfied: pyftpdlib>=1.5.6 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 153)) (1.5.6)
+Collecting pyftpdlib>=1.5.6
+  Using cached pyftpdlib-1.5.6.tar.gz (188 kB)
+Requirement already satisfied: pygame>=2.0.1 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 154)) (2.0.1)
+Collecting pygame>=2.0.1
+  Using cached pygame-2.1.0-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (18.3 MB)
+Requirement already satisfied: pygdbmi>=0.10.0.1 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 155)) (0.10.0.1)
+Collecting pygdbmi>=0.10.0.1
+  Using cached pygdbmi-0.10.0.1-py3-none-any.whl (16 kB)
+Requirement already satisfied: Pygments>=2.10.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 156)) (2.10.0)
+Collecting Pygments>=2.10.0
+  Using cached Pygments-2.10.0-py3-none-any.whl (1.0 MB)
+Requirement already satisfied: PyGObject>=3.40.1 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 157)) (3.40.1)
+Collecting PyGObject>=3.40.1
+  Using cached PyGObject-3.42.0.tar.gz (716 kB)
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+    Preparing wheel metadata: started
+    Preparing wheel metadata: finished with status 'done'
+Requirement already satisfied: pyinotify>=0.9.6 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 158)) (0.9.6)
+Collecting pyinotify>=0.9.6
+  Using cached pyinotify-0.9.6.tar.gz (60 kB)
+Requirement already satisfied: pylint>=2.11.1 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 159)) (2.11.1)
+Collecting pylint>=2.11.1
+  Using cached pylint-2.11.1-py3-none-any.whl (392 kB)
+Requirement already satisfied: pyneqsys>=0.5.7 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 160)) (0.5.7)
+Collecting pyneqsys>=0.5.7
+  Using cached pyneqsys-0.5.7.tar.gz (29 kB)
+Requirement already satisfied: pyodesys>=0.14.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 161)) (0.14.0)
+Collecting pyodesys>=0.14.0
+  Using cached pyodesys-0.14.1.tar.gz (242 kB)
+Requirement already satisfied: pyOpenSSL>=21.0.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 162)) (21.0.0)
+Collecting pyOpenSSL>=21.0.0
+  Using cached pyOpenSSL-21.0.0-py2.py3-none-any.whl (55 kB)
+Requirement already satisfied: pyparsing>=2.4.7 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 163)) (2.4.7)
+Collecting pyparsing>=2.4.7
+  Using cached pyparsing-3.0.6-py3-none-any.whl (97 kB)
+Requirement already satisfied: pypresence>=4.2.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 164)) (4.2.0)
+Collecting pypresence>=4.2.0
+  Using cached pypresence-4.2.1-py2.py3-none-any.whl (11 kB)
+Requirement already satisfied: PyQt5>=5.15.4 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 165)) (5.15.4)
+Collecting PyQt5>=5.15.4
+  Using cached PyQt5-5.15.6-cp36-abi3-manylinux1_x86_64.whl (8.3 MB)
+Requirement already satisfied: PyQt5-sip>=12.9.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 166)) (12.9.0)
+Collecting PyQt5-sip>=12.9.0
+  Using cached PyQt5_sip-12.9.0-cp39-cp39-manylinux1_x86_64.whl (328 kB)
+Requirement already satisfied: pyrsistent>=0.18.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 167)) (0.18.0)
+Collecting pyrsistent>=0.18.0
+  Using cached pyrsistent-0.18.0-cp39-cp39-manylinux1_x86_64.whl (117 kB)
+Requirement already satisfied: PySDL2>=0.9.7 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 168)) (0.9.7)
+Collecting PySDL2>=0.9.7
+  Using cached PySDL2-0.9.9-py3-none-any.whl (562 kB)
+Requirement already satisfied: pysdl2-dll>=2.0.14.post2 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 169)) (2.0.14.post2)
+Collecting pysdl2-dll>=2.0.14.post2
+  Using cached pysdl2_dll-2.0.16-py2.py3-none-manylinux_2_24_x86_64.whl (9.6 MB)
+Requirement already satisfied: PySDM>=1.10 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 170)) (1.10)
+Collecting PySDM>=1.10
+  Using cached PySDM-1.20-py3-none-any.whl (179 kB)
+Requirement already satisfied: pyserial>=3.5 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 171)) (3.5)
+Collecting pyserial>=3.5
+  Using cached pyserial-3.5-py2.py3-none-any.whl (90 kB)
+Requirement already satisfied: python-dateutil>=2.8.2 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 172)) (2.8.2)
+Collecting python-dateutil>=2.8.2
+  Using cached python_dateutil-2.8.2-py2.py3-none-any.whl (247 kB)
+Requirement already satisfied: python-engineio>=4.2.1 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 173)) (4.2.1)
+Collecting python-engineio>=4.2.1
+  Using cached python_engineio-4.3.0-py3-none-any.whl (52 kB)
+Requirement already satisfied: python-pam>=1.8.4 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 174)) (1.8.4)
+Collecting python-pam>=1.8.4
+  Using cached python_pam-1.8.4-py2.py3-none-any.whl (5.8 kB)
+Requirement already satisfied: python-socketio>=5.4.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 175)) (5.4.0)
+Collecting python-socketio>=5.4.0
+  Using cached python_socketio-5.5.0-py3-none-any.whl (55 kB)
+Requirement already satisfied: python-xapp>=2.2.1 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 176)) (2.2.1)
+Requirement already satisfied: python-xlib>=0.31 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 177)) (0.31)
+Collecting python-xlib>=0.31
+  Using cached python_xlib-0.31-py2.py3-none-any.whl (179 kB)
+Requirement already satisfied: pytz>=2021.1 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 178)) (2021.1)
+Collecting pytz>=2021.1
+  Using cached pytz-2021.3-py2.py3-none-any.whl (503 kB)
+Requirement already satisfied: pyudev>=0.22.0.dev20201112 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 179)) (0.22.0.dev20201112)
+Collecting pyudev>=0.22.0.dev20201112
+  Using cached pyudev-0.22.0.tar.gz (85 kB)
+Requirement already satisfied: pyunsplash>=1.0.0rc2 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 180)) (1.0.0rc2)
+Collecting pyunsplash>=1.0.0rc2
+  Using cached pyunsplash-1.0.0rc2.tar.gz (73 kB)
+Requirement already satisfied: pywal>=3.3.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 181)) (3.3.0)
+Collecting pywal>=3.3.0
+  Using cached pywal-3.3.0.tar.gz (61 kB)
+Requirement already satisfied: pyxdg>=0.27 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 182)) (0.27)
+Collecting pyxdg>=0.27
+  Using cached pyxdg-0.27-py2.py3-none-any.whl (49 kB)
+Requirement already satisfied: PyYAML>=5.4.1 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 183)) (5.4.1)
+Collecting PyYAML>=5.4.1
+  Using cached PyYAML-6.0-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl (661 kB)
+Requirement already satisfied: pyzmq>=22.3.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 184)) (22.3.0)
+Collecting pyzmq>=22.3.0
+  Using cached pyzmq-22.3.0-cp39-cp39-manylinux_2_12_x86_64.manylinux2010_x86_64.whl (1.1 MB)
+Requirement already satisfied: quantities>=0.12.5 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 185)) (0.12.5)
+Collecting quantities>=0.12.5
+  Using cached quantities-0.12.5.tar.gz (85 kB)
+Requirement already satisfied: rados>=2.0.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 186)) (2.0.0)
+Requirement already satisfied: rbd>=2.0.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 187)) (2.0.0)
+Requirement already satisfied: rectangle-packer>=2.0.1 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 188)) (2.0.1)
+Collecting rectangle-packer>=2.0.1
+  Using cached rectangle_packer-2.0.1-cp39-cp39-manylinux2010_x86_64.whl (274 kB)
+Requirement already satisfied: requests>=2.26.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 189)) (2.26.0)
+Collecting requests>=2.26.0
+  Using cached requests-2.26.0-py2.py3-none-any.whl (62 kB)
+Requirement already satisfied: requests-oauthlib>=0.7.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 190)) (0.7.0)
+Collecting requests-oauthlib>=0.7.0
+  Using cached requests_oauthlib-1.3.0-py2.py3-none-any.whl (23 kB)
+Requirement already satisfied: resolvelib>=0.5.5 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 191)) (0.5.5)
+Collecting resolvelib>=0.5.5
+  Using cached resolvelib-0.8.1-py2.py3-none-any.whl (16 kB)
+Requirement already satisfied: retrying>=1.3.3 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 192)) (1.3.3)
+Collecting retrying>=1.3.3
+  Using cached retrying-1.3.3.tar.gz (10 kB)
+Requirement already satisfied: rgw>=2.0.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 193)) (2.0.0)
+Requirement already satisfied: scipy>=1.7.1 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 194)) (1.7.1)
+Collecting scipy>=1.7.1
+  Using cached scipy-1.7.2-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (39.8 MB)
+Requirement already satisfied: SCons>=4.2.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 195)) (4.2.0)
+Collecting SCons>=4.2.0
+  Using cached SCons-4.3.0-py3-none-any.whl (4.2 MB)
+Requirement already satisfied: Send2Trash>=1.8.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 196)) (1.8.0)
+Collecting Send2Trash>=1.8.0
+  Using cached Send2Trash-1.8.0-py3-none-any.whl (18 kB)
+Requirement already satisfied: setproctitle>=1.2.2 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 197)) (1.2.2)
+Collecting setproctitle>=1.2.2
+  Using cached setproctitle-1.2.2-cp39-cp39-manylinux1_x86_64.whl (35 kB)
+Requirement already satisfied: shellescape>=3.8.1 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 198)) (3.8.1)
+Collecting shellescape>=3.8.1
+  Using cached shellescape-3.8.1-py2.py3-none-any.whl (3.1 kB)
+Requirement already satisfied: simplejson>=3.17.5 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 199)) (3.17.5)
+Collecting simplejson>=3.17.5
+  Using cached simplejson-3.17.6-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl (136 kB)
+Requirement already satisfied: six>=1.16.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 200)) (1.16.0)
+Collecting six>=1.16.0
+  Using cached six-1.16.0-py2.py3-none-any.whl (11 kB)
+Requirement already satisfied: snowballstemmer>=2.1.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 201)) (2.1.0)
+Collecting snowballstemmer>=2.1.0
+  Using cached snowballstemmer-2.2.0-py2.py3-none-any.whl (93 kB)
+Requirement already satisfied: solaar>=1.0.7 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 202)) (1.0.7)
+Collecting solaar>=1.0.7
+  Using cached solaar-1.0.7-py3-none-any.whl (345 kB)
+Requirement already satisfied: soupsieve>=2.2.1 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 203)) (2.2.1)
+Collecting soupsieve>=2.2.1
+  Using cached soupsieve-2.3.1-py3-none-any.whl (37 kB)
+Requirement already satisfied: speedtest-cli>=2.1.3 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 204)) (2.1.3)
+Collecting speedtest-cli>=2.1.3
+  Using cached speedtest_cli-2.1.3-py2.py3-none-any.whl (23 kB)
+Requirement already satisfied: Sphinx>=4.2.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 205)) (4.2.0)
+Collecting Sphinx>=4.2.0
+  Using cached Sphinx-4.3.0-py3-none-any.whl (3.1 MB)
+Requirement already satisfied: sphinxcontrib-applehelp>=1.0.2 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 206)) (1.0.2)
+Collecting sphinxcontrib-applehelp>=1.0.2
+  Using cached sphinxcontrib_applehelp-1.0.2-py2.py3-none-any.whl (121 kB)
+Requirement already satisfied: sphinxcontrib-devhelp>=1.0.2 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 207)) (1.0.2)
+Collecting sphinxcontrib-devhelp>=1.0.2
+  Using cached sphinxcontrib_devhelp-1.0.2-py2.py3-none-any.whl (84 kB)
+Requirement already satisfied: sphinxcontrib-htmlhelp>=2.0.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 208)) (2.0.0)
+Collecting sphinxcontrib-htmlhelp>=2.0.0
+  Using cached sphinxcontrib_htmlhelp-2.0.0-py2.py3-none-any.whl (100 kB)
+Requirement already satisfied: sphinxcontrib-jsmath>=1.0.1 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 209)) (1.0.1)
+Collecting sphinxcontrib-jsmath>=1.0.1
+  Using cached sphinxcontrib_jsmath-1.0.1-py2.py3-none-any.whl (5.1 kB)
+Requirement already satisfied: sphinxcontrib-qthelp>=1.0.3 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 210)) (1.0.3)
+Collecting sphinxcontrib-qthelp>=1.0.3
+  Using cached sphinxcontrib_qthelp-1.0.3-py2.py3-none-any.whl (90 kB)
+Requirement already satisfied: sphinxcontrib-serializinghtml>=1.1.5 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 211)) (1.1.5)
+Collecting sphinxcontrib-serializinghtml>=1.1.5
+  Using cached sphinxcontrib_serializinghtml-1.1.5-py2.py3-none-any.whl (94 kB)
+Requirement already satisfied: sym>=0.3.5 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 212)) (0.3.5)
+Collecting sym>=0.3.5
+  Using cached sym-0.3.5.tar.gz (31 kB)
+Requirement already satisfied: sympy>=1.8 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 213)) (1.8)
+Collecting sympy>=1.8
+  Using cached sympy-1.9-py3-none-any.whl (6.2 MB)
+Requirement already satisfied: sysmontask>==1.x.x in /usr/lib/python3.9/site-packages (from -r installed.txt (line 214)) (1.x.x)
+Collecting sysmontask>==1.x.x
+  Using cached sysmontask-1.1.1b25-py3-none-any.whl (105 kB)
+Requirement already satisfied: team>=1.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 215)) (1.0)
+Requirement already satisfied: terminado>=0.12.1 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 216)) (0.12.1)
+Collecting terminado>=0.12.1
+  Using cached terminado-0.12.1-py3-none-any.whl (15 kB)
+Requirement already satisfied: testpath>=0.5.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 217)) (0.5.0)
+Collecting testpath>=0.5.0
+  Using cached testpath-0.5.0-py3-none-any.whl (84 kB)
+Requirement already satisfied: ThrustRTC>=0.3.13 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 218)) (0.3.13)
+Collecting ThrustRTC>=0.3.13
+  Using cached ThrustRTC-0.3.15-py3-none-any.whl (765 kB)
+Requirement already satisfied: tinycss2>=1.1.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 219)) (1.1.0)
+Collecting tinycss2>=1.1.0
+  Using cached tinycss2-1.1.0-py3-none-any.whl (21 kB)
+Requirement already satisfied: toml>=0.10.2 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 220)) (0.10.2)
+Collecting toml>=0.10.2
+  Using cached toml-0.10.2-py2.py3-none-any.whl (16 kB)
+Requirement already satisfied: tomli>=1.2.1 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 221)) (1.2.1)
+Collecting tomli>=1.2.1
+  Using cached tomli-1.2.2-py3-none-any.whl (12 kB)
+Requirement already satisfied: tornado>=6.1 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 222)) (6.1)
+Collecting tornado>=6.1
+  Using cached tornado-6.1-cp39-cp39-manylinux2010_x86_64.whl (427 kB)
+Requirement already satisfied: tqdm>=4.62.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 223)) (4.62.0)
+Collecting tqdm>=4.62.0
+  Using cached tqdm-4.62.3-py2.py3-none-any.whl (76 kB)
+Requirement already satisfied: traitlets>=5.1.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 224)) (5.1.0)
+Collecting traitlets>=5.1.0
+  Using cached traitlets-5.1.1-py3-none-any.whl (102 kB)
+Requirement already satisfied: typing-extensions>=3.10.0.2 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 225)) (3.10.0.2)
+Collecting typing-extensions>=3.10.0.2
+  Using cached typing_extensions-4.0.0-py3-none-any.whl (22 kB)
+Requirement already satisfied: uc-micro-py>=1.0.1 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 226)) (1.0.1)
+Collecting uc-micro-py>=1.0.1
+  Using cached uc_micro_py-1.0.1-py3-none-any.whl (6.2 kB)
+Requirement already satisfied: urllib3>=1.26.6 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 227)) (1.26.6)
+Collecting urllib3>=1.26.6
+  Using cached urllib3-1.26.7-py2.py3-none-any.whl (138 kB)
+Requirement already satisfied: validate>=5.1.0.dev0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 228)) (5.1.0.dev0)
+Requirement already satisfied: vdf>=3.4 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 229)) (3.4)
+Collecting vdf>=3.4
+  Using cached vdf-3.4-py2.py3-none-any.whl (10 kB)
+Requirement already satisfied: wcwidth>=0.2.5 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 230)) (0.2.5)
+Collecting wcwidth>=0.2.5
+  Using cached wcwidth-0.2.5-py2.py3-none-any.whl (30 kB)
+Requirement already satisfied: webencodings>=0.5.1 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 231)) (0.5.1)
+Collecting webencodings>=0.5.1
+  Using cached webencodings-0.5.1-py2.py3-none-any.whl (11 kB)
+Requirement already satisfied: Werkzeug>=2.0.1 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 232)) (2.0.1)
+Collecting Werkzeug>=2.0.1
+  Using cached Werkzeug-2.0.2-py3-none-any.whl (288 kB)
+Requirement already satisfied: wpgtk>=6.5.5 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 233)) (6.5.5)
+Collecting wpgtk>=6.5.5
+  Using cached wpgtk-6.5.5.tar.gz (40 kB)
+Requirement already satisfied: wrapt>=1.12.1 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 234)) (1.12.1)
+Collecting wrapt>=1.12.1
+  Using cached wrapt-1.13.3-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl (81 kB)
+Requirement already satisfied: yarl>=1.6.3 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 235)) (1.6.3)
+Collecting yarl>=1.6.3
+  Using cached yarl-1.7.2-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl (304 kB)
+Requirement already satisfied: youtube-dl>=2021.6.6 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 236)) (2021.6.6)
+Collecting youtube-dl>=2021.6.6
+  Using cached youtube_dl-2021.6.6-py2.py3-none-any.whl (1.9 MB)
+Requirement already satisfied: ytmusicapi>=0.18.0 in /usr/lib/python3.9/site-packages (from -r installed.txt (line 237)) (0.18.0)
+Collecting ytmusicapi>=0.18.0
+  Using cached ytmusicapi-0.19.4-py3-none-any.whl (46 kB)
+Collecting aiosignal>=1.1.2
+  Using cached aiosignal-1.2.0-py3-none-any.whl (8.2 kB)
+Collecting frozenlist>=1.1.1
+  Using cached frozenlist-1.2.0-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl (203 kB)
+Collecting charset-normalizer<3.0,>=2.0
+  Using cached charset_normalizer-2.0.7-py3-none-any.whl (38 kB)
+Requirement already satisfied: setuptools>=20.0 in /usr/lib/python3.9/site-packages (from astroid>=2.8.2->-r installed.txt (line 7)) (57.4.0)
+Collecting dulwich>=0.20.23
+  Using cached dulwich-0.20.26-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl (545 kB)
+Collecting cmd2
+  Using cached cmd2-2.3.1-py3-none-any.whl (149 kB)
+Collecting aiohttp>=3.7.4.post0
+  Using cached aiohttp-3.7.4.post0-cp39-cp39-manylinux2014_x86_64.whl (1.4 MB)
+INFO: pip is looking at multiple versions of discord-py-self to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of defusedxml to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of decorator to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of debugpy to determine which version is compatible with other requirements. This could take a while.
+Collecting debugpy>=1.4.3
+  Using cached debugpy-1.5.0-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl (1.9 MB)
+  Using cached debugpy-1.4.3-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl (1.8 MB)
+INFO: pip is looking at multiple versions of cython to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of cycler to determine which version is compatible with other requirements. This could take a while.
+Collecting cycler>=0.10.0
+  Using cached cycler-0.10.0-py2.py3-none-any.whl (6.5 kB)
+INFO: pip is looking at multiple versions of curandrtc to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of cryptography to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of crypto to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of coverage to determine which version is compatible with other requirements. This could take a while.
+Collecting coverage>=5.5
+  Using cached coverage-6.1.1-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl (214 kB)
+  Using cached coverage-6.1-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl (214 kB)
+  Using cached coverage-6.0.2-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl (254 kB)
+  Using cached coverage-6.0.1-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl (254 kB)
+  Using cached coverage-6.0-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_12_x86_64.manylinux2010_x86_64.whl (253 kB)
+  Using cached coverage-5.5-cp39-cp39-manylinux2010_x86_64.whl (243 kB)
+INFO: pip is looking at multiple versions of discord-py-self to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of defusedxml to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of decorator to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of debugpy to determine which version is compatible with other requirements. This could take a while.
+INFO: This is taking longer than usual. You might need to provide the dependency resolver with stricter constraints to reduce runtime. If you want to abort this run, you can press Ctrl + C to do so. To improve how pip performs, tell us what happened here: https://pip.pypa.io/surveys/backtracking
+INFO: This is taking longer than usual. You might need to provide the dependency resolver with stricter constraints to reduce runtime. If you want to abort this run, you can press Ctrl + C to do so. To improve how pip performs, tell us what happened here: https://pip.pypa.io/surveys/backtracking
+INFO: This is taking longer than usual. You might need to provide the dependency resolver with stricter constraints to reduce runtime. If you want to abort this run, you can press Ctrl + C to do so. To improve how pip performs, tell us what happened here: https://pip.pypa.io/surveys/backtracking
+INFO: This is taking longer than usual. You might need to provide the dependency resolver with stricter constraints to reduce runtime. If you want to abort this run, you can press Ctrl + C to do so. To improve how pip performs, tell us what happened here: https://pip.pypa.io/surveys/backtracking
+INFO: pip is looking at multiple versions of cython to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of cycler to determine which version is compatible with other requirements. This could take a while.
+INFO: This is taking longer than usual. You might need to provide the dependency resolver with stricter constraints to reduce runtime. If you want to abort this run, you can press Ctrl + C to do so. To improve how pip performs, tell us what happened here: https://pip.pypa.io/surveys/backtracking
+INFO: This is taking longer than usual. You might need to provide the dependency resolver with stricter constraints to reduce runtime. If you want to abort this run, you can press Ctrl + C to do so. To improve how pip performs, tell us what happened here: https://pip.pypa.io/surveys/backtracking
+INFO: pip is looking at multiple versions of contextlib2 to determine which version is compatible with other requirements. This could take a while.
+Collecting contextlib2>=0.6.0.post1
+  Using cached contextlib2-0.6.0.post1-py2.py3-none-any.whl (9.8 kB)
+INFO: pip is looking at multiple versions of curandrtc to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of cryptography to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of crypto to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of coverage to determine which version is compatible with other requirements. This could take a while.
+INFO: This is taking longer than usual. You might need to provide the dependency resolver with stricter constraints to reduce runtime. If you want to abort this run, you can press Ctrl + C to do so. To improve how pip performs, tell us what happened here: https://pip.pypa.io/surveys/backtracking
+INFO: This is taking longer than usual. You might need to provide the dependency resolver with stricter constraints to reduce runtime. If you want to abort this run, you can press Ctrl + C to do so. To improve how pip performs, tell us what happened here: https://pip.pypa.io/surveys/backtracking
+INFO: This is taking longer than usual. You might need to provide the dependency resolver with stricter constraints to reduce runtime. If you want to abort this run, you can press Ctrl + C to do so. To improve how pip performs, tell us what happened here: https://pip.pypa.io/surveys/backtracking
+INFO: This is taking longer than usual. You might need to provide the dependency resolver with stricter constraints to reduce runtime. If you want to abort this run, you can press Ctrl + C to do so. To improve how pip performs, tell us what happened here: https://pip.pypa.io/surveys/backtracking
+INFO: pip is looking at multiple versions of configobj to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of compizconfig-python to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of command-runner to determine which version is compatible with other requirements. This could take a while.
+Collecting command-runner>=1.2.1
+  Using cached command_runner-1.2.1-py3-none-any.whl (17 kB)
+INFO: pip is looking at multiple versions of colorama to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of click to determine which version is compatible with other requirements. This could take a while.
+Collecting click>=8.0.1
+  Using cached click-8.0.2-py3-none-any.whl (97 kB)
+  Using cached click-8.0.1-py3-none-any.whl (97 kB)
+INFO: pip is looking at multiple versions of contextlib2 to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of chrome-gnome-shell to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of chempy to determine which version is compatible with other requirements. This could take a while.
+Collecting chempy>=0.8.1
+  Using cached chempy-0.8.1.tar.gz (179 kB)
+INFO: This is taking longer than usual. You might need to provide the dependency resolver with stricter constraints to reduce runtime. If you want to abort this run, you can press Ctrl + C to do so. To improve how pip performs, tell us what happened here: https://pip.pypa.io/surveys/backtracking
+INFO: pip is looking at multiple versions of configobj to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of compizconfig-python to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of command-runner to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of chardet to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of cffi to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of certifi to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of cephfs-shell to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of cephfs to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of ceph-volume to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of ceph to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of ccsm to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of cbor2 to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of cachecontrol to determine which version is compatible with other requirements. This could take a while.
+Collecting CacheControl>=0.12.6
+  Using cached CacheControl-0.12.9-py2.py3-none-any.whl (23 kB)
+  Using cached CacheControl-0.12.8-py2.py3-none-any.whl (23 kB)
+  Using cached CacheControl-0.12.7-py2.py3-none-any.whl (23 kB)
+  Using cached CacheControl-0.12.6-py2.py3-none-any.whl (19 kB)
+INFO: This is taking longer than usual. You might need to provide the dependency resolver with stricter constraints to reduce runtime. If you want to abort this run, you can press Ctrl + C to do so. To improve how pip performs, tell us what happened here: https://pip.pypa.io/surveys/backtracking
+INFO: This is taking longer than usual. You might need to provide the dependency resolver with stricter constraints to reduce runtime. If you want to abort this run, you can press Ctrl + C to do so. To improve how pip performs, tell us what happened here: https://pip.pypa.io/surveys/backtracking
+INFO: This is taking longer than usual. You might need to provide the dependency resolver with stricter constraints to reduce runtime. If you want to abort this run, you can press Ctrl + C to do so. To improve how pip performs, tell us what happened here: https://pip.pypa.io/surveys/backtracking
+INFO: pip is looking at multiple versions of colorama to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of click to determine which version is compatible with other requirements. This could take a while.
+INFO: This is taking longer than usual. You might need to provide the dependency resolver with stricter constraints to reduce runtime. If you want to abort this run, you can press Ctrl + C to do so. To improve how pip performs, tell us what happened here: https://pip.pypa.io/surveys/backtracking
+INFO: This is taking longer than usual. You might need to provide the dependency resolver with stricter constraints to reduce runtime. If you want to abort this run, you can press Ctrl + C to do so. To improve how pip performs, tell us what happened here: https://pip.pypa.io/surveys/backtracking
+INFO: pip is looking at multiple versions of chrome-gnome-shell to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of chempy to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of btrfsutil to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of brotli to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of brlapi to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of breezy to determine which version is compatible with other requirements. This could take a while.
+Collecting breezy>=3.2.0
+  Downloading breezy-3.2.0.tar.gz (9.4 MB)
+INFO: This is taking longer than usual. You might need to provide the dependency resolver with stricter constraints to reduce runtime. If you want to abort this run, you can press Ctrl + C to do so. To improve how pip performs, tell us what happened here: https://pip.pypa.io/surveys/backtracking
+INFO: This is taking longer than usual. You might need to provide the dependency resolver with stricter constraints to reduce runtime. If you want to abort this run, you can press Ctrl + C to do so. To improve how pip performs, tell us what happened here: https://pip.pypa.io/surveys/backtracking
+INFO: pip is looking at multiple versions of chardet to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of cffi to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of certifi to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of cephfs-shell to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of cephfs to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of ceph-volume to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of ceph to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of ccsm to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of cbor2 to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of cachecontrol to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of bottle to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of bleach to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of binwalk to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of bidict to determine which version is compatible with other requirements. This could take a while.
+Collecting bidict>=0.21.3
+  Using cached bidict-0.21.3-py3-none-any.whl (36 kB)
+INFO: This is taking longer than usual. You might need to provide the dependency resolver with stricter constraints to reduce runtime. If you want to abort this run, you can press Ctrl + C to do so. To improve how pip performs, tell us what happened here: https://pip.pypa.io/surveys/backtracking
+INFO: This is taking longer than usual. You might need to provide the dependency resolver with stricter constraints to reduce runtime. If you want to abort this run, you can press Ctrl + C to do so. To improve how pip performs, tell us what happened here: https://pip.pypa.io/surveys/backtracking
+INFO: This is taking longer than usual. You might need to provide the dependency resolver with stricter constraints to reduce runtime. If you want to abort this run, you can press Ctrl + C to do so. To improve how pip performs, tell us what happened here: https://pip.pypa.io/surveys/backtracking
+INFO: This is taking longer than usual. You might need to provide the dependency resolver with stricter constraints to reduce runtime. If you want to abort this run, you can press Ctrl + C to do so. To improve how pip performs, tell us what happened here: https://pip.pypa.io/surveys/backtracking
+INFO: This is taking longer than usual. You might need to provide the dependency resolver with stricter constraints to reduce runtime. If you want to abort this run, you can press Ctrl + C to do so. To improve how pip performs, tell us what happened here: https://pip.pypa.io/surveys/backtracking
+INFO: This is taking longer than usual. You might need to provide the dependency resolver with stricter constraints to reduce runtime. If you want to abort this run, you can press Ctrl + C to do so. To improve how pip performs, tell us what happened here: https://pip.pypa.io/surveys/backtracking
+INFO: This is taking longer than usual. You might need to provide the dependency resolver with stricter constraints to reduce runtime. If you want to abort this run, you can press Ctrl + C to do so. To improve how pip performs, tell us what happened here: https://pip.pypa.io/surveys/backtracking
+INFO: This is taking longer than usual. You might need to provide the dependency resolver with stricter constraints to reduce runtime. If you want to abort this run, you can press Ctrl + C to do so. To improve how pip performs, tell us what happened here: https://pip.pypa.io/surveys/backtracking
+INFO: This is taking longer than usual. You might need to provide the dependency resolver with stricter constraints to reduce runtime. If you want to abort this run, you can press Ctrl + C to do so. To improve how pip performs, tell us what happened here: https://pip.pypa.io/surveys/backtracking
+INFO: This is taking longer than usual. You might need to provide the dependency resolver with stricter constraints to reduce runtime. If you want to abort this run, you can press Ctrl + C to do so. To improve how pip performs, tell us what happened here: https://pip.pypa.io/surveys/backtracking
+INFO: pip is looking at multiple versions of beautifulsoup4 to determine which version is compatible with other requirements. This could take a while.
+Collecting beautifulsoup4>=4.9.3
+  Using cached beautifulsoup4-4.9.3-py3-none-any.whl (115 kB)
+INFO: pip is looking at multiple versions of btrfsutil to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of brotli to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of brlapi to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of breezy to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of beaker to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of bcrypt to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of backcall to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of babel to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of attrs to determine which version is compatible with other requirements. This could take a while.
+INFO: pip is looking at multiple versions of async-timeout to determine which version is compatible with other requirements. This could take a while.
+Collecting async-timeout>=3.0.1
+  Downloading async_timeout-4.0.0-py3-none-any.whl (6.1 kB)
+  Downloading async_timeout-4.0.0a3-py3-none-any.whl (9.5 kB)

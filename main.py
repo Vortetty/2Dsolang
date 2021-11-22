@@ -4,6 +4,9 @@ import _curses
 import enum
 import textwrap
 import time
+import subprocess
+
+subprocess.run(["kitty",  "@", "resize-window"])
 
 class DIRECTION(enum.Enum):
     UP = 0
@@ -42,19 +45,19 @@ def main(stdscr: _curses.window, code):
     codeBox = stdscr.derwin(34, 66, 0, 0)
     codeBox.box()
     codeBox.refresh()
-    codeBox.nodelay(True)
+    #codeBox.nodelay(True)
     memBox = stdscr.derwin(34, 5, 0, 66)
     memBox.box()
     memBox.refresh()
-    memBox.nodelay(True)
+    #memBox.nodelay(True)
     outputBox = stdscr.derwin(29, 66, 0, 71)
     outputBox.box()
     outputBox.refresh()
-    outputBox.nodelay(True)
+    #outputBox.nodelay(True)
     codeHistoryBox = stdscr.derwin(5, 66, 29, 71)
     codeHistoryBox.box()
     codeHistoryBox.refresh()
-    codeHistoryBox.nodelay(True)
+    #codeHistoryBox.nodelay(True)
     
     codeContent = codeBox.derwin(32, 65, 1, 1)
     memContent = memBox.derwin(33, 3, 1, 1)
@@ -106,118 +109,142 @@ def main(stdscr: _curses.window, code):
         outputContent.refresh()
         codeHistoryContent.refresh()
         
+    def clearAll():
+        #stdscr.clear()
+        #codeBox.clear()
+        #codeContent.clear()
+        #memBox.clear()
+        #memContent.clear()
+        #outputBox.clear()
+        #outputContent.clear()
+        #codeHistoryBox.clear()
+        #codeHistoryContent.clear()
+        
+        
+        #stdscr.box()
+        codeBox.box()
+        memBox.box()
+        outputBox.box()
+        codeHistoryBox.box()
+        
+        stdscr.refresh()
+        codeBox.refresh()
+        codeContent.refresh()
+        memBox.refresh()
+        memContent.refresh()
+        outputBox.refresh()
+        outputContent.refresh()
+        codeHistoryBox.refresh()
+        codeHistoryContent.refresh()
+    
+    def reRender(jumping = False):
+        #clearAll()
+        updateCode(jumping)
+        updateMem()
+        updateOutputs()
+        
     def scanForJumpForward():
-        match direction:
-            case DIRECTION.UP:
-                while code[pos.y][pos.x] != '|':
-                    start_time = time.time()
-                    pos.y = (pos.y - 1) % 32
-                    updateCode(True)
-                    while time.time() - start_time < 1/commandsPerSecond:
-                        pass
-            case DIRECTION.DOWN:
-                while code[pos.y][pos.x] != '|':
-                    start_time = time.time()
-                    pos.y = (pos.y + 1) % 32
-                    updateCode(True)
-                    while time.time() - start_time < 1/commandsPerSecond:
-                        pass
-            case DIRECTION.LEFT:
-                while code[pos.y][pos.x] != '|':
-                    start_time = time.time()
-                    pos.x = (pos.x - 1) % 32
-                    updateCode(True)
-                    while time.time() - start_time < 1/commandsPerSecond:
-                        pass
-            case DIRECTION.RIGHT:
-                while code[pos.y][pos.x] != '|':
-                    start_time = time.time()
-                    pos.x = (pos.x + 1) % 32
-                    updateCode(True)
-                    while time.time() - start_time < 1/commandsPerSecond:
-                        pass
+        if direction == DIRECTION.UP:
+            while code[pos.y][pos.x] != '|':
+                start_time = time.time()
+                pos.y = (pos.y - 1) % 32
+                reRender(True)
+                while time.time() - start_time < 1/commandsPerSecond:
+                    pass
+        elif direction == DIRECTION.DOWN:
+            while code[pos.y][pos.x] != '|':
+                start_time = time.time()
+                pos.y = (pos.y + 1) % 32
+                reRender(True)
+                while time.time() - start_time < 1/commandsPerSecond:
+                    pass
+        elif direction == DIRECTION.LEFT:
+            while code[pos.y][pos.x] != '|':
+                start_time = time.time()
+                pos.x = (pos.x - 1) % 32
+                reRender(True)
+                while time.time() - start_time < 1/commandsPerSecond:
+                    pass
+        elif direction == DIRECTION.RIGHT:
+            while code[pos.y][pos.x] != '|':
+                start_time = time.time()
+                pos.x = (pos.x + 1) % 32
+                reRender(True)
+                while time.time() - start_time < 1/commandsPerSecond:
+                    pass
                     
     def scanForJumpBackward():
-        match direction:
-            case DIRECTION.UP:
-                while code[pos.y][pos.x] != '|':
-                    start_time = time.time()
-                    pos.y = (pos.y + 1) % 32
-                    updateCode(True)
-                    while time.time() - start_time < 1/commandsPerSecond:
-                        pass
-            case DIRECTION.DOWN:
-                while code[pos.y][pos.x] != '|':
-                    start_time = time.time()
-                    pos.y = (pos.y - 1) % 32
-                    updateCode(True)
-                    while time.time() - start_time < 1/commandsPerSecond:
-                        pass
-            case DIRECTION.LEFT:
-                while code[pos.y][pos.x] != '|':
-                    start_time = time.time()
-                    pos.x = (pos.x + 1) % 32
-                    updateCode(True)
-                    while time.time() - start_time < 1/commandsPerSecond:
-                        pass
-            case DIRECTION.RIGHT:
-                while code[pos.y][pos.x] != '|':
-                    start_time = time.time()
-                    pos.x = (pos.x - 1) % 32
-                    updateCode(True)
-                    while time.time() - start_time < 1/commandsPerSecond:
-                        pass
-        
-        
+        if direction == DIRECTION.UP:
+            while code[pos.y][pos.x] != '|':
+                start_time = time.time()
+                pos.y = (pos.y + 1) % 32
+                reRender(True)
+                while time.time() - start_time < 1/commandsPerSecond:
+                    pass
+        elif direction == DIRECTION.DOWN:
+            while code[pos.y][pos.x] != '|':
+                start_time = time.time()
+                pos.y = (pos.y - 1) % 32
+                reRender(True)
+                while time.time() - start_time < 1/commandsPerSecond:
+                    pass
+        elif direction == DIRECTION.LEFT:
+            while code[pos.y][pos.x] != '|':
+                start_time = time.time()
+                pos.x = (pos.x + 1) % 32
+                reRender(True)
+                while time.time() - start_time < 1/commandsPerSecond:
+                    pass
+        elif direction == DIRECTION.RIGHT:
+            while code[pos.y][pos.x] != '|':
+                start_time = time.time()
+                pos.x = (pos.x - 1) % 32
+                reRender(True)
+                while time.time() - start_time < 1/commandsPerSecond:
+                    pass
     
     while not end:
         start_time = time.time()
-        
         cmd = code[pos.y][pos.x]
-        inp = codeContent.getch()
             
-        match cmd:
-            case '^':
-                direction = DIRECTION.UP
-            case 'v':
-                direction = DIRECTION.DOWN
-            case '<':
-                direction = DIRECTION.LEFT
-            case '>':
-                direction = DIRECTION.RIGHT
-            case '+':
-                memory[currentMemCell] = (memory[currentMemCell] + 1) % 256 
-            case '-':
-                memory[currentMemCell] = (memory[currentMemCell] - 1) % 256 
-            case '/':
-                currentMemCell = (currentMemCell + 1) % 32
-            case '\\':
-                currentMemCell = (currentMemCell - 1) % 32
-            case '_':
-                scanForJumpForward()
-            case '=':
-                scanForJumpBackward()
-                        
-                
-        match direction:
-            case DIRECTION.UP:
-                pos.y = (pos.y - 1) % 32
-            case DIRECTION.DOWN:
-                pos.y = (pos.y + 1) % 32
-            case DIRECTION.LEFT:
-                pos.x = (pos.x - 1) % 32
-            case DIRECTION.RIGHT:
-                pos.x = (pos.x + 1) % 32
+        if cmd == '^':
+            direction = DIRECTION.UP
+        elif cmd == 'v':
+            direction = DIRECTION.DOWN
+        elif cmd == '<':
+            direction = DIRECTION.LEFT
+        elif cmd == '>':
+            direction = DIRECTION.RIGHT
+        elif cmd == '+':
+            memory[currentMemCell] = (memory[currentMemCell] + 1) % 256 
+        elif cmd == '-':
+            memory[currentMemCell] = (memory[currentMemCell] - 1) % 256 
+        elif cmd == '/':
+            currentMemCell = (currentMemCell + 1) % 32
+        elif cmd == '\\':
+            currentMemCell = (currentMemCell - 1) % 32
+        elif cmd == '_':
+            scanForJumpForward()
+        elif cmd == '=':
+            scanForJumpBackward()
+                    
+            
+        if direction == DIRECTION.UP:
+            pos.y = (pos.y - 1) % 32
+        elif direction == DIRECTION.DOWN:
+            pos.y = (pos.y + 1) % 32
+        elif direction == DIRECTION.LEFT:
+            pos.x = (pos.x - 1) % 32
+        elif direction == DIRECTION.RIGHT:
+            pos.x = (pos.x + 1) % 32
             
         
-        updateCode()
-        updateMem()
-        updateOutputs()
+        reRender()
         
         while time.time() - start_time < 1/commandsPerSecond:
             pass
 
-fp = "e" #input("Enter file path >>> ")
+fp = "basics.2dl" #input("Enter file path >>> ")
 f = open(fp, "r")
 source = [
     [" " for x in range(32)] for y in range(32)
