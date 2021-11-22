@@ -6,7 +6,7 @@ import textwrap
 import time
 import subprocess
 
-subprocess.run(["kitty",  "@", "resize-window"])
+subprocess.run(["kitty", "@", "set-window-title", "2Dsolang Interpreter"])
 
 class DIRECTION(enum.Enum):
     UP = 0
@@ -225,8 +225,10 @@ def main(stdscr: _curses.window, code):
             currentMemCell = (currentMemCell - 1) % 32
         elif cmd == '_':
             scanForJumpForward()
+            start_time = time.time()
         elif cmd == '=':
             scanForJumpBackward()
+            start_time = time.time()
                     
             
         if direction == DIRECTION.UP:

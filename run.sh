@@ -15,8 +15,23 @@ then
             exit 0
         fi
     else
+        echo "Kitty installed"
         curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
+        echo "Font installed"
+        mkdir ~/.local/share/fonts
+        cp ./fonts/* ~/.local/share/fonts/
     fi
+else
+    echo "Kitty is already installed, not installing"
+fi
+
+if fc-list | grep -q -i "consolas:style=regular"; then
+    echo "Consolas already installed, not installing"
+else
+    echo "Installing consolas"
+    mkdir ~/.local/share/fonts
+    cp ./fonts/* ~/.local/share/fonts/
+    echo "done"
 fi
 
 
@@ -28,4 +43,15 @@ while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symli
 done
 DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
 
-kitty -o allow_remote_control=yes -o initial_window_width=1241 -o initial_window_height=638 -d="$DIR" python3 ./main.py
+kitty \
+    -o allow_remote_control=yes \
+    -o initial_window_width=1241 \
+    -o initial_window_height=625 \
+    -o font_family="Consolas Regular" \
+    -o bold_font="auto" \
+    -o italic_font="auto" \
+    -o bold_italic_font="auto" \
+    -o font_size=11 \
+    -o tab_bar_style=hidden \
+    -d="$DIR" \
+    python3 ./main.py &
