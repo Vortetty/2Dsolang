@@ -47,9 +47,9 @@ while jumping, no instruction is executed unless it is stated to below
 
 ## Examples
 
-| Name                | Code                                |
-| ------------------- | ----------------------------------- |
-| ascii code to ascii | ``>$003014000|+;   %z~``            |
-| quine               | ``|@#00000+;015><``                 |
-| hello world         | ``s017|@#00000+;029Hello world!><`` |
-| cheat quine         | `` `` (a blank file)                |
+| Name                | Code                               |
+| ------------------- | ---------------------------------- |
+| ascii code to ascii | ``>$003014000|+;   %z~``           |
+| quine               | ``|@#00000+;015~``                 |
+| hello world         | ``s017|@#00000+;029Hello world!~`` |
+| cheat quine         | `` `` (a blank file)               |
