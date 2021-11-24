@@ -8,6 +8,7 @@ import subprocess
 import argparse
 import traceback
 import os
+import random
 
 from sympy import false
 
@@ -232,25 +233,31 @@ try:
         def parseDigitsForward(n=3, offset=0):
             newPos = Vec2(pos.x, pos.y)
             num = ""
+            extraHighlights = []
+            
             for i in range(1, n+1):
                 start_time = time.time()
                 
                 if direction == DIRECTION.UP:
                     newPos.y = (newPos.y - 1) % 32
                     num += code[newPos.y-offset][newPos.x]
-                    updateCode(False, [Vec2(pos.x, y-offset) for y in range(pos.y-i, pos.y+1)])
+                    extraHighlights.append(Vec2(newPos.x, newPos.y-offset))
+                    updateCode(False, extraHighlights)
                 elif direction == DIRECTION.DOWN:
                     newPos.y = (newPos.y + 1) % 32
                     num += code[newPos.y+offset][newPos.x]
-                    updateCode(False, [Vec2(pos.x, y+offset) for y in range(pos.y, pos.y+i+1)])
+                    extraHighlights.append(Vec2(newPos.x, newPos.y+offset))
+                    updateCode(False, extraHighlights)
                 elif direction == DIRECTION.LEFT:
                     newPos.x = (newPos.x - 1) % 32
                     num += code[newPos.y][newPos.x-offset]
-                    updateCode(False, [Vec2(x-offset, pos.y) for x in range(pos.x-i, pos.x+1)])
+                    extraHighlights.append(Vec2(newPos.x-offset, newPos.y))
+                    updateCode(False, extraHighlights)
                 elif direction == DIRECTION.RIGHT:
                     newPos.x = (newPos.x + 1) % 32
                     num += code[newPos.y][newPos.x+offset]
-                    updateCode(False, [Vec2(x+offset, pos.y) for x in range(pos.x, pos.x+i+1)])
+                    extraHighlights.append(Vec2(newPos.x+offset, newPos.y))
+                    updateCode(False, extraHighlights)
                 
                 while time.time() - start_time < 1/commandsPerSecond:
                     pass
@@ -272,12 +279,20 @@ try:
                 direction = DIRECTION.LEFT
             elif cmd == '>':
                 direction = DIRECTION.RIGHT
+            elif cmd == '?':
+                direction = random.choice([DIRECTION.UP, DIRECTION.DOWN, DIRECTION.LEFT, DIRECTION.RIGHT])
             elif cmd == '+':
                 memory[currentMemCell] = (memory[currentMemCell] + 1) % 256 
             elif cmd == '-':
                 memory[currentMemCell] = (memory[currentMemCell] - 1) % 256 
             elif cmd == 'z':
                 memory[currentMemCell] = 0
+            elif cmd == 'p':
+                tmp = parseDigitsForward(3)
+                memory[tmp] = (memory[tmp] + 1) % 256 
+            elif cmd == 'm':
+                tmp = parseDigitsForward(3)
+                memory[tmp] = (memory[tmp] - 1) % 256 
             elif cmd == 's':
                 memory[currentMemCell] = parseDigitsForward(3) % 256 
             elif cmd == '/':
@@ -325,22 +340,55 @@ try:
                         code[(beginPos.y+i) % 32][beginPos.x] = chr(codeContent.getch())
                     elif direction == DIRECTION.LEFT:
                         code[beginPos.y][(beginPos.x-i) % 32] = "_"
-                        updateCode(False, [ Vec2(beginPos.x, (beginPos.x - i) % 32) ])
+                        updateCode(False, [ Vec2((beginPos.x - i) % 32, beginPos.y) ])
                         code[beginPos.y][(beginPos.x-i) % 32] = chr(codeContent.getch())
                     elif direction == DIRECTION.RIGHT:
                         code[beginPos.y][(beginPos.x+i) % 32] = "_"
-                        updateCode(False, [ Vec2(beginPos.x, (beginPos.x + i) % 32) ])
+                        updateCode(False, [ Vec2((beginPos.x + i) % 32, beginPos.y) ])
                         code[beginPos.y][(beginPos.x+i) % 32] = chr(codeContent.getch())
                     
                     while time.time() - start_time < 1/commandsPerSecond:
                         pass
                 
                 start_time = time.time()
+            elif cmd == '%':
+                outputContent.addch(chr(memory[currentMemCell]))
+            elif cmd == '&':
+                outputContent.addstr(str(memory[currentMemCell]))
             elif cmd == '@':
                 x = parseDigitsForward(3)
                 y = parseDigitsForward(3, 3)
                 outputContent.addch(code[y][x])
-                
+            elif cmd == '~':
+                break
+            elif cmd == '\'':
+                while code[pos.y][pos.x] != '\'':
+                    start_time = time.time()
+                            
+                    if direction == DIRECTION.UP:
+                            pos.y = (pos.y - 1) % 32
+                    elif direction == DIRECTION.DOWN:
+                            pos.y = (pos.y + 1) % 32
+                    elif direction == DIRECTION.LEFT:
+                            pos.x = (pos.x - 1) % 32
+                    elif direction == DIRECTION.RIGHT:
+                            pos.x = (pos.x + 1) % 32
+            elif cmd == '"':
+                while code[pos.y][pos.x] != '"':
+                    start_time = time.time()
+                            
+                    if direction == DIRECTION.UP:
+                            pos.y = (pos.y - 1) % 32
+                    elif direction == DIRECTION.DOWN:
+                            pos.y = (pos.y + 1) % 32
+                    elif direction == DIRECTION.LEFT:
+                            pos.x = (pos.x - 1) % 32
+                    elif direction == DIRECTION.RIGHT:
+                            pos.x = (pos.x + 1) % 32
+                            
+                    if code[pos.y][pos.x] != '"':
+                        memory[currentMemCell] = ord(code[pos.y][pos.x])
+                        currentMemCell = (currentMemCell + 1) % 32
                         
                 
             if direction == DIRECTION.UP:
@@ -357,6 +405,8 @@ try:
             
             while time.time() - start_time < 1/commandsPerSecond:
                 pass
+            
+        stdscr.getch()
 
     fp = args.file
     f = open(fp, "r")
