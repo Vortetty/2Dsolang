@@ -114,10 +114,10 @@ try:
         
         curses.init_pair(2, curses.COLOR_RED, curses.COLOR_BLACK)
         
-        def updateCode(jumping = False, highlights = []):
+        def updateCode(jumping = False, highlights = [], cursors = []):
             for y,yi in enumerate(code):
                 for x,xi in enumerate(yi):
-                    codeContent.addstr(y, x*2, "░░" if jumping and ((x==pos.x and y==pos.y) or Vec2(x, y) in highlights) else xi + " ", (curses.A_REVERSE if ((x==pos.x and y==pos.y) or Vec2(x, y) in highlights) and not jumping else curses.A_NORMAL))
+                    codeContent.addstr(y, x*2, "░░" if jumping and ((x==pos.x and y==pos.y) or Vec2(x, y) in highlights) else ("‗‗" if Vec2(x, y) in cursors else xi + " "), (curses.A_REVERSE if ((x==pos.x and y==pos.y) or Vec2(x, y) in highlights) and not jumping else curses.A_NORMAL))
             codeContent.refresh()
             
         def updateMem():
@@ -287,6 +287,11 @@ try:
                 memory[currentMemCell] = (memory[currentMemCell] - 1) % 256 
             elif cmd == 'z':
                 memory[currentMemCell] = 0
+            elif cmd == '!':
+                memory[currentMemCell] = random.randint(
+                    parseDigitsForward(3),
+                    parseDigitsForward(3,3)
+                )
             elif cmd == 'p':
                 tmp = parseDigitsForward(3)
                 memory[tmp] = (memory[tmp] + 1) % 256 
@@ -331,20 +336,16 @@ try:
                     start_time = time.time()
                     
                     if direction == DIRECTION.UP:
-                        code[(beginPos.y-i) % 32][beginPos.x] = "_"
-                        updateCode(False, [ Vec2(beginPos.x, (beginPos.y - i) % 32) ])
+                        updateCode(False, [ Vec2(beginPos.x, (beginPos.y - i) % 32) ], [ Vec2(beginPos.x, (beginPos.y - i) % 32) ])
                         code[(beginPos.y-i) % 32][beginPos.x] = chr(codeContent.getch())
                     elif direction == DIRECTION.DOWN:
-                        code[(beginPos.y+i) % 32][beginPos.x] = "_"
-                        updateCode(False, [ Vec2(beginPos.x, (beginPos.y + i) % 32) ])
+                        updateCode(False, [ Vec2(beginPos.x, (beginPos.y + i) % 32) ], [ Vec2(beginPos.x, (beginPos.y + i) % 32) ])
                         code[(beginPos.y+i) % 32][beginPos.x] = chr(codeContent.getch())
                     elif direction == DIRECTION.LEFT:
-                        code[beginPos.y][(beginPos.x-i) % 32] = "_"
-                        updateCode(False, [ Vec2((beginPos.x - i) % 32, beginPos.y) ])
+                        updateCode(False, [ Vec2((beginPos.x - i) % 32, beginPos.y) ], [ Vec2((beginPos.x - i) % 32, beginPos.y) ])
                         code[beginPos.y][(beginPos.x-i) % 32] = chr(codeContent.getch())
                     elif direction == DIRECTION.RIGHT:
-                        code[beginPos.y][(beginPos.x+i) % 32] = "_"
-                        updateCode(False, [ Vec2((beginPos.x + i) % 32, beginPos.y) ])
+                        updateCode(False, [ Vec2((beginPos.x + i) % 32, beginPos.y) ], [ Vec2((beginPos.x + i) % 32, beginPos.y) ])
                         code[beginPos.y][(beginPos.x+i) % 32] = chr(codeContent.getch())
                     
                     while time.time() - start_time < 1/commandsPerSecond:
@@ -373,6 +374,11 @@ try:
                             pos.x = (pos.x - 1) % 32
                     elif direction == DIRECTION.RIGHT:
                             pos.x = (pos.x + 1) % 32
+                            
+                    updateCode(True)
+                            
+                    while time.time() - start_time < 1/commandsPerSecond:
+                        pass
             elif cmd == '"':
                 while code[pos.y][pos.x] != '"':
                     start_time = time.time()
@@ -389,6 +395,11 @@ try:
                     if code[pos.y][pos.x] != '"':
                         memory[currentMemCell] = ord(code[pos.y][pos.x])
                         currentMemCell = (currentMemCell + 1) % 32
+                        
+                    reRender(True)
+                        
+                    while time.time() - start_time < 1/commandsPerSecond:
+                        pass
                         
                 
             if direction == DIRECTION.UP:
