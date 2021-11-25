@@ -285,21 +285,21 @@ try:
                 memory[currentMemCell] = (memory[currentMemCell] + 1) % 256 
             elif cmd == '-':
                 memory[currentMemCell] = (memory[currentMemCell] - 1) % 256 
+            elif cmd == 's':
+                memory[currentMemCell] = parseDigitsForward(3) % 256 
             elif cmd == 'z':
                 memory[currentMemCell] = 0
-            elif cmd == '!':
-                memory[currentMemCell] = random.randint(
-                    parseDigitsForward(3),
-                    parseDigitsForward(3,3)
-                )
             elif cmd == 'p':
                 tmp = parseDigitsForward(3)
                 memory[tmp] = (memory[tmp] + 1) % 256 
             elif cmd == 'm':
                 tmp = parseDigitsForward(3)
                 memory[tmp] = (memory[tmp] - 1) % 256 
-            elif cmd == 's':
-                memory[currentMemCell] = parseDigitsForward(3) % 256 
+            elif cmd == '!':
+                memory[currentMemCell] = random.randint(
+                    parseDigitsForward(3),
+                    parseDigitsForward(3,3)
+                )
             elif cmd == '/':
                 currentMemCell = (currentMemCell + 1) % 32
             elif cmd == '\\':
