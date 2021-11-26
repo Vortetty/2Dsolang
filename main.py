@@ -9,29 +9,6 @@ import argparse
 import traceback
 import os
 import random
-from pyaudio import PyAudio # sudo apt-get install python{,3}-pyaudio
-import math
-
-def sine_tone(frequency, duration, volume=1, sample_rate=22050):
-    n_samples = int(sample_rate * duration)
-    restframes = n_samples % sample_rate
-
-    p = PyAudio()
-    stream = p.open(format=p.get_format_from_width(1), # 8bit
-                    channels=1, # mono
-                    rate=sample_rate,
-                    output=True)
-    s = lambda t: volume * math.sin(2 * math.pi * frequency * t / sample_rate)
-    samples = (int(s(t) * 0x7f + 0x80) for t in range(n_samples))
-    for buf in zip(*[samples]*sample_rate): # write several samples at a time
-        stream.write(bytes(bytearray(buf)))
-
-    # fill remainder of frameset with silence
-    stream.write(b'\x80' * restframes)
-
-    stream.stop_stream()
-    stream.close()
-    p.terminate()
 
 try:
     parser = argparse.ArgumentParser()
@@ -292,6 +269,9 @@ try:
             start_time = time.time()
             cmd = code[pos.y][pos.x]
                 
+            #
+            # Commands
+            #
             if cmd == '^':
                 direction = DIRECTION.UP
             elif cmd == 'v':
@@ -306,10 +286,12 @@ try:
                 memory[currentMemCell] = (memory[currentMemCell] + 1) % 256 
             elif cmd == '-':
                 memory[currentMemCell] = (memory[currentMemCell] - 1) % 256 
-            elif cmd == 's':
-                memory[currentMemCell] = parseDigitsForward(3) % 256 
+            elif cmd == 'n':
+                memory[currentMemCell] = (~(memory[currentMemCell] & (parseDigitsForward(3) % 256))) % 256
             elif cmd == 'z':
                 memory[currentMemCell] = 0
+            elif cmd == 's':
+                memory[currentMemCell] = parseDigitsForward(3) % 256 
             elif cmd == 'p':
                 tmp = parseDigitsForward(3)
                 memory[tmp] = (memory[tmp] + 1) % 256 
