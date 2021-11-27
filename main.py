@@ -366,6 +366,15 @@ try:
             elif cmd == '~':
                 break
             elif cmd == '\'':
+                if direction == DIRECTION.UP:
+                        pos.y = (pos.y - 1) % 32
+                elif direction == DIRECTION.DOWN:
+                        pos.y = (pos.y + 1) % 32
+                elif direction == DIRECTION.LEFT:
+                        pos.x = (pos.x - 1) % 32
+                elif direction == DIRECTION.RIGHT:
+                        pos.x = (pos.x + 1) % 32
+                        
                 while code[pos.y][pos.x] != '\'':
                     start_time = time.time()
                             
@@ -383,8 +392,20 @@ try:
                     while time.time() - start_time < 1/commandsPerSecond:
                         pass
             elif cmd == '"':
+                if direction == DIRECTION.UP:
+                        pos.y = (pos.y - 1) % 32
+                elif direction == DIRECTION.DOWN:
+                        pos.y = (pos.y + 1) % 32
+                elif direction == DIRECTION.LEFT:
+                        pos.x = (pos.x - 1) % 32
+                elif direction == DIRECTION.RIGHT:
+                        pos.x = (pos.x + 1) % 32
+                        
                 while code[pos.y][pos.x] != '"':
                     start_time = time.time()
+                    
+                    memory[currentMemCell] = ord(code[pos.y][pos.x])
+                    currentMemCell = (currentMemCell + 1) % 32
                             
                     if direction == DIRECTION.UP:
                             pos.y = (pos.y - 1) % 32
@@ -395,9 +416,33 @@ try:
                     elif direction == DIRECTION.RIGHT:
                             pos.x = (pos.x + 1) % 32
                             
-                    if code[pos.y][pos.x] != '"':
-                        memory[currentMemCell] = ord(code[pos.y][pos.x])
-                        currentMemCell = (currentMemCell + 1) % 32
+                    reRender(True)
+                        
+                    while time.time() - start_time < 1/commandsPerSecond:
+                        pass
+            elif cmd == 'w':
+                if direction == DIRECTION.UP:
+                        pos.y = (pos.y - 1) % 32
+                elif direction == DIRECTION.DOWN:
+                        pos.y = (pos.y + 1) % 32
+                elif direction == DIRECTION.LEFT:
+                        pos.x = (pos.x - 1) % 32
+                elif direction == DIRECTION.RIGHT:
+                        pos.x = (pos.x + 1) % 32
+                        
+                while code[pos.y][pos.x] != 'w':
+                    start_time = time.time()
+                    
+                    outputContent.addch(code[pos.y][pos.x])
+                            
+                    if direction == DIRECTION.UP:
+                            pos.y = (pos.y - 1) % 32
+                    elif direction == DIRECTION.DOWN:
+                            pos.y = (pos.y + 1) % 32
+                    elif direction == DIRECTION.LEFT:
+                            pos.x = (pos.x - 1) % 32
+                    elif direction == DIRECTION.RIGHT:
+                            pos.x = (pos.x + 1) % 32
                         
                     reRender(True)
                         
@@ -420,6 +465,11 @@ try:
             while time.time() - start_time < 1/commandsPerSecond:
                 pass
             
+        outputContent.addstr("\nPress enter to exit")
+        outputContent.refresh()
+        while stdscr.getch() != -1:
+            pass
+        stdscr.nodelay(False)
         stdscr.getch()
 
     fp = args.file

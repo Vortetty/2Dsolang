@@ -48,12 +48,13 @@ while jumping, no instruction is executed unless it is stated to below
 | `~`     | ends the program                                                                                                                                                                                                                                                                                                                        | <img src="https://raw.githubusercontent.com/Vortetty/2Dsolang/main/check.png" width=16 height=16 /> |
 | `'`     | disable parsing of any characters until the next occurence of `'`                                                                                                                                                                                                                                                                       | <img src="https://raw.githubusercontent.com/Vortetty/2Dsolang/main/check.png" width=16 height=16 /> |
 | `"`     | write every character until the next occurence of `"` into memory starting at the currently selected cell and auto-incrementing the selected cell                                                                                                                                                                                       | <img src="https://raw.githubusercontent.com/Vortetty/2Dsolang/main/check.png" width=16 height=16 /> |
+| `w`     | write all characters to terminal until the next occurence of `w`                                                                                                                                                                                                                                                                       | <img src="https://raw.githubusercontent.com/Vortetty/2Dsolang/main/check.png" width=16 height=16 /> |
 
 ## Examples
 
-| Name                | Code                               |
-| ------------------- | ---------------------------------- |
-| ascii code to ascii | ``>$003014000|+;   %z~``           |
-| quine               | ``|@#00000+;015~``                 |
-| hello world         | ``s017|@#00000+;029Hello world!~`` |
-| cheat quine         | `` `` (a blank file)               |
+| Name                | Code                                 |
+| ------------------- | ------------------------------------ |
+| ascii code to ascii | ``>$003014000|+;   %z~``             |
+| quine               | ``|@#00000+;015~``                   |
+| hello world         | ``s018|@#00000+;030'Hello World!'~`` |
+| cheat quine         | `` `` (a blank file)                 |
