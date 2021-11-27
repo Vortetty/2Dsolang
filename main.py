@@ -19,6 +19,8 @@ try:
 
     if not args.no_kitty:
         subprocess.run(["kitty", "@", "set-window-title", f"2Dsolang Interpreter ({os.path.basename(args.file)})"])
+    elif os.name == "nt":
+        subprocess.run(f"title 2Dsolang Interpreter ({os.path.basename(args.file)})", shell=True)
 
     class DIRECTION(enum.Enum):
         UP = 0
