@@ -1,6 +1,10 @@
 # 2Dsolang
 
-To run the interpreter, simply run `./run-crossplatform [-c COMMANDS_PER_SECOND] <filename>`  
+To run the interpreter, simply run: (it is cross-platform, the bat extension is just so windows accepts that it is, infact, a script)
+
+- `run-crossplatform.bat [-c COMMANDS_PER_SECOND] <filename>` for windows
+- `./run-crossplatform.bat [-c COMMANDS_PER_SECOND] <filename>` for linux/mac
+
 all code takes place on a 2d grid (included interpreter supports 32x32 code and 32 bytes of memory), any character that isn't defined as a command is treated as a noop unless part of a command
 the max memory for this revision is 256 bytes, though this can be increased by modifying the parsing logic(it is just one variable)
 code starts at the top left corner of the grid, by default it will execute left to right
@@ -48,7 +52,14 @@ while jumping, no instruction is executed unless it is stated to below
 | `~`     | ends the program                                                                                                                                                                                                                                                                                                                        | <img src="https://raw.githubusercontent.com/Vortetty/2Dsolang/main/check.png" width=16 height=16 /> |
 | `'`     | disable parsing of any characters until the next occurence of `'`                                                                                                                                                                                                                                                                       | <img src="https://raw.githubusercontent.com/Vortetty/2Dsolang/main/check.png" width=16 height=16 /> |
 | `"`     | write every character until the next occurence of `"` into memory starting at the currently selected cell and auto-incrementing the selected cell                                                                                                                                                                                       | <img src="https://raw.githubusercontent.com/Vortetty/2Dsolang/main/check.png" width=16 height=16 /> |
-| `w`     | write all characters to terminal until the next occurence of `w`                                                                                                                                                                                                                                                                       | <img src="https://raw.githubusercontent.com/Vortetty/2Dsolang/main/check.png" width=16 height=16 /> |
+
+### Non-Recommended for use
+
+They are not recommended for use (because it makes things easy), but are included for the ability to make programs easier to read and write.
+
+| Command | Description                                                      | Implemented                                                                                         |
+| :-----: | ---------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------: |
+| `w`     | write all characters to terminal until the next occurence of `w` | <img src="https://raw.githubusercontent.com/Vortetty/2Dsolang/main/check.png" width=16 height=16 /> |
 
 ## Examples
 
