@@ -2,6 +2,7 @@ from curses import wrapper
 import curses
 import _curses
 import enum
+import math
 import textwrap
 import time
 import subprocess
@@ -9,6 +10,11 @@ import argparse
 import traceback
 import os
 import random
+
+memory = None
+pos = None
+currentMemCell = None
+cmd = None
 
 try:
     parser = argparse.ArgumentParser()
@@ -41,6 +47,9 @@ try:
                     return True
                 else:
                     return False
+        
+        def __str__(self) -> str:
+            return f"({self.x}, {self.y})"
             
     def addToHistory(historyText: list, text: list):
         for t in text:
@@ -48,6 +57,11 @@ try:
         del historyText[:text.len()]
 
     def main(stdscr: _curses.window, code):
+        global memory
+        global pos
+        global currentMemCell
+        global cmd
+        
         curses.curs_set(0)
         curses.start_color()
         curses.use_default_colors()
@@ -300,6 +314,18 @@ try:
             elif cmd == 'm':
                 tmp = parseDigitsForward(3)
                 memory[tmp] = (memory[tmp] - 1) % 256 
+            elif cmd == 'Z':
+                memory[parseDigitsForward(3)] = 0
+            elif cmd == 'S':
+                memory[parseDigitsForward(3)] = parseDigitsForward(3, 3) % 256 
+            elif cmd == 'x':
+                memory[currentMemCell] = math.floor(memory[currentMemCell]*parseDigitsForward(3))
+            elif cmd == 'd':
+                memory[currentMemCell] = math.floor(memory[currentMemCell]/parseDigitsForward(3))
+            elif cmd == 'X':
+                memory[currentMemCell] = math.floor(memory[parseDigitsForward(3)]*parseDigitsForward(3, 3))
+            elif cmd == 'D':
+                memory[currentMemCell] = math.floor(memory[parseDigitsForward(3)]/parseDigitsForward(3, 3))
             elif cmd == '!':
                 memory[currentMemCell] = random.randint(
                     parseDigitsForward(3),
@@ -322,6 +348,14 @@ try:
                 if (parseDigitsForward(3) != memory[currentMemCell]):
                     scanForJumpForward()
                 start_time = time.time()
+            elif cmd == 'g':
+                if (parseDigitsForward(3) > memory[currentMemCell]):
+                    scanForJumpForward()
+                start_time = time.time()
+            elif cmd == 'l':
+                if (parseDigitsForward(3) < memory[currentMemCell]):
+                    scanForJumpForward()
+                start_time = time.time()
             elif cmd == '=':
                 scanForJumpBackward()
                 start_time = time.time()
@@ -331,6 +365,14 @@ try:
                 start_time = time.time()
             elif cmd == ';':
                 if (parseDigitsForward(3) != memory[currentMemCell]):
+                    scanForJumpBackward()
+                start_time = time.time()
+            elif cmd == 'G':
+                if (parseDigitsForward(3) > memory[currentMemCell]):
+                    scanForJumpBackward()
+                start_time = time.time()
+            elif cmd == 'L':
+                if (parseDigitsForward(3) < memory[currentMemCell]):
                     scanForJumpBackward()
                 start_time = time.time()
             elif cmd == '$':
@@ -490,4 +532,7 @@ try:
     wrapper(main, source)
 except Exception as e:
     print(traceback.format_exc())
-    input("Press enter to continue")
+    print(f"Current Char: {pos} \"{cmd}\"")
+    print(f"Memory: {memory}")
+    print(f"Current Memory Cell: {currentMemCell}")
+    input("\nPress enter to continue")

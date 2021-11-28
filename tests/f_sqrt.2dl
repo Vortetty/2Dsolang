@@ -1,0 +1,32 @@
+s255v '<- your number goes here'
+v |<> S003#00 =
+>Z001 Z002v    >v
+v    000, < >|v&w
+/         -   w3)
+:         0   f0 
+0         0   s0=
+0         0   q* 
+0         *   rww
+]|            t(\
+ >-       ^ < ww&
+>/+\X002002 ^ >^~
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Method used:
+
+    n = mem0
+    k = mem1
+    r = mem2
+    ```py
+    def sqrt(n):
+        k = r = 0 
+        while n:
+            if k != 0:
+                k -= 1
+            else:
+                r += 1
+                k = 2 * r
+            n -= 1
+        return r
+    ```
