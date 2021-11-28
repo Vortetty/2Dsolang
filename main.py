@@ -357,6 +357,8 @@ try:
                         pass
                 
                 start_time = time.time()
+            elif cmd == 'i':
+                memory[currentMemCell] = chr(codeContent.getch())
             elif cmd == '%':
                 outputContent.addch(chr(memory[currentMemCell]))
             elif cmd == '&':
