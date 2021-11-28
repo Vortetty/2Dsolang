@@ -1,6 +1,6 @@
 # Proof of Turing-Completeness
 
-All Brainfuck programs are turing complete, and all brainfuck programs can be converted to 2Dsolang as shown below
+Brainfuck is turing complete, and all brainfuck programs can be converted to 2Dsolang as shown below
 
 | Brainfuck | 2Dsolang                                             |
 | :-------: | :--------------------------------------------------: |
@@ -41,3 +41,23 @@ v                             <
 v                             <
 >//+%~
 ```
+
+### Cat
+
+Brainfuck:
+
+```brainfuck
+,[.,]
+```
+
+2Dsolang:
+
+```
+i |.000} %i |:000}
+  {              [
+       ]    { 
+```
+
+## Conclusion
+
+All features of Brainfuck have been shown to be implementable in 2Dsolang, and therefore, as best i can tell, is turing complete.

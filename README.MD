@@ -3,6 +3,7 @@
 To run the interpreter, simply run: (it is cross-platform, the bat extension is just so windows accepts that it is, infact, a script)
 
 - `run-crossplatform.bat [-c COMMANDS_PER_SECOND] <filename>` for windows
+  - Note: this requires a curses binary from [here](https://www.lfd.uci.edu/~gohlke/pythonlibs/#curses) due to python not coming with curses windows support by default
 - `./run-crossplatform.bat [-c COMMANDS_PER_SECOND] <filename>` for linux/mac
 
 all code takes place on a 2d grid (included interpreter supports 32x32 code and 32 bytes of memory), any character that isn't defined as a command is treated as a noop unless part of a command
