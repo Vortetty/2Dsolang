@@ -25,7 +25,7 @@ Brainfuck:
 
 2Dsolang:
 
-```
+```txt
 v
 -
 -
@@ -52,7 +52,7 @@ Brainfuck:
 
 2Dsolang:
 
-```
+```txt
 i |.000} %i |:000}
   {              [
        ]    { 
