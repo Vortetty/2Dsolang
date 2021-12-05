@@ -18,15 +18,26 @@ cmd = None
 
 try:
     parser = argparse.ArgumentParser()
+    parser.add_argument("file", type=str, help="The file to execute")
     parser.add_argument("-c", "--cps", type=float, default=16, help="How many commands to execute per second")
     parser.add_argument("-n", "--no-kitty", help="Disable Kitty commands", action="store_true")
-    parser.add_argument("file", type=str, help="The file to execute")
+    parser.add_argument("-g", "--no-text", help="Disable debug rendering, this also makes the board size dynamic and memory to have any number of cells, and instructions will execute as fast as possible", action="store_true")
+    parser.add_argument("-m", "--mem-cells", type=int, default=32, help="Memory cells to have")
+    parser.add_argument("-w", "--width", type=int, default=32, help="Width of the board in cells")
+    parser.add_argument("-e", "--height", type=int, default=32, help="Height of the board in cells")
     args = parser.parse_args()
+    
+    memCellCount = args.mem_cells
+    boardWidth = args.width
+    boardHeight = args.height
 
-    if not args.no_kitty:
-        subprocess.run(["kitty", "@", "set-window-title", f"2Dsolang Interpreter ({os.path.basename(args.file)})"])
-    elif os.name == "nt":
-        subprocess.run(f"title 2Dsolang Interpreter ({os.path.basename(args.file)})", shell=True)
+    if os.name != "nt":
+        if not args.no_kitty:
+            subprocess.run(["kitty", "@", "set-window-title", f"2Dsolang Interpreter ({os.path.basename(args.file)})"])
+            subprocess.run(["kitty", "@", "resize-os-window", "--width", f"{boardWidth*2 + 66 + 2 + 5}", "--height", f"{(max(boardHeight, memCellCount) + 1) + 2}", "--self"])
+    else:
+        subprocess.run(f"title 2Dsolang Interpreter ({os.path.basename(args.file)}) ", shell=True)
+        print("Do not maximize this window. It breaks curses and then the program looks horribly wrong.")
 
     class DIRECTION(enum.Enum):
         UP = 0
@@ -67,40 +78,38 @@ try:
         curses.use_default_colors()
         curses.delay_output(0)
         
-        if not curses.has_colors() and curses.can_change_color():
-            print("Your terminal does not support color")
-            exit()
-        
         stdscr.clear()
-        curses.resize_term(34, 32*2 + 66 + 2 + 5)
+        curses.resize_term((max(boardHeight, memCellCount) + 1) + 2, boardWidth*2 + boardWidth*2+2 + 2 + 5)
         stdscr.box()
         stdscr.refresh()
         stdscr.nodelay(True)
-        codeBox = stdscr.derwin(34, 66, 0, 0)
+        codeBox = stdscr.derwin((max(boardHeight, memCellCount) + 1) + 2, boardWidth*2+2, 0, 0)
         codeBox.box()
         codeBox.refresh()
         codeBox.nodelay(False)
-        memBox = stdscr.derwin(34, 5, 0, 66)
+        memBox = stdscr.derwin((max(boardHeight, memCellCount) + 1) + 2, 5, 0, boardWidth*2+2)
         memBox.box()
         memBox.refresh()
         memBox.nodelay(False)
-        outputBox = stdscr.derwin(29, 66, 0, 71)
+        outputBox = stdscr.derwin((max(boardHeight, memCellCount) + 1) + 2 - 7, 66, 0, boardWidth*2+2+5)
         outputBox.box()
         outputBox.refresh()
         outputBox.nodelay(False)
-        codeHistoryBox = stdscr.derwin(5, 66, 29, 71)
+        codeHistoryBox = stdscr.derwin(7, 66, (max(boardHeight, memCellCount) + 1) + 2 - 7, boardWidth*2+2+5)
         codeHistoryBox.box()
         codeHistoryBox.refresh()
         codeHistoryBox.nodelay(False)
         
-        codeContent = codeBox.derwin(32, 65, 1, 1)
-        memContent = memBox.derwin(33, 3, 1, 1)
-        outputContent = outputBox.derwin(26, 64, 1, 1)
-        codeHistoryContent = codeHistoryBox.derwin(3, 64, 1, 1)
+        codeContent = codeBox.derwin((max(boardHeight, memCellCount) + 1), boardWidth*2, 1, 1)
+        memContent = memBox.derwin((max(boardHeight, memCellCount) + 1), 3, 1, 1)
+        outputContent = outputBox.derwin((max(boardHeight, memCellCount) + 1) - 7, 64, 1, 1)
+        codeHistoryContent = codeHistoryBox.derwin(5, 64, 1, 1)
         
-        for y,yi in enumerate(code):
-            for x,xi in enumerate(yi):
-                codeContent.addstr(y, x*2, xi + " ")
+        subprocess.run(["/usr/bin/notify-send", "--icon=error", f"{len(list(enumerate(list(enumerate(code))[0][1])))}, {len(list(enumerate(code)))}"])
+        for index in range(boardHeight*boardWidth):
+            x = int(index % boardWidth)
+            y = int(index / boardWidth)
+            codeContent.addstr(y, x*2, code[y][x])
         
         codeContent.refresh()
         memContent.refresh()
@@ -114,7 +123,7 @@ try:
             [] for i in range(codeHistoryContent.getmaxyx()[0])
         ]
         memory = [
-            0 for i in range(32)
+            0 for i in range(memCellCount)
         ]
         
         for y,i in enumerate(memory):
@@ -184,13 +193,13 @@ try:
                 start_time = time.time()
                         
                 if newDirection == DIRECTION.UP:
-                        pos.y = (pos.y - 1) % 32
+                        pos.y = (pos.y - 1) % boardHeight
                 elif newDirection == DIRECTION.DOWN:
-                        pos.y = (pos.y + 1) % 32
+                        pos.y = (pos.y + 1) % boardHeight
                 elif newDirection == DIRECTION.LEFT:
-                        pos.x = (pos.x - 1) % 32
+                        pos.x = (pos.x - 1) % boardWidth
                 elif newDirection == DIRECTION.RIGHT:
-                        pos.x = (pos.x + 1) % 32
+                        pos.x = (pos.x + 1) % boardWidth
                         
                 cmd = code[pos.y][pos.x]
                 if cmd == '{':
@@ -222,13 +231,13 @@ try:
                 start_time = time.time()
                         
                 if newDirection == DIRECTION.UP:
-                        pos.y = (pos.y - 1) % 32
+                        pos.y = (pos.y - 1) % boardHeight
                 elif newDirection == DIRECTION.DOWN:
-                        pos.y = (pos.y + 1) % 32
+                        pos.y = (pos.y + 1) % boardHeight
                 elif newDirection == DIRECTION.LEFT:
-                        pos.x = (pos.x - 1) % 32
+                        pos.x = (pos.x - 1) % boardWidth
                 elif newDirection == DIRECTION.RIGHT:
-                        pos.x = (pos.x + 1) % 32
+                        pos.x = (pos.x + 1) % boardWidth
                         
                 cmd = code[pos.y][pos.x]
                 if cmd == '{':
@@ -253,22 +262,22 @@ try:
                 start_time = time.time()
                 
                 if direction == DIRECTION.UP:
-                    newPos.y = (newPos.y - 1) % 32
+                    newPos.y = (newPos.y - 1) % boardHeight
                     num += code[newPos.y-offset][newPos.x]
                     extraHighlights.append(Vec2(newPos.x, newPos.y-offset))
                     updateCode(False, extraHighlights)
                 elif direction == DIRECTION.DOWN:
-                    newPos.y = (newPos.y + 1) % 32
+                    newPos.y = (newPos.y + 1) % boardHeight
                     num += code[newPos.y+offset][newPos.x]
                     extraHighlights.append(Vec2(newPos.x, newPos.y+offset))
                     updateCode(False, extraHighlights)
                 elif direction == DIRECTION.LEFT:
-                    newPos.x = (newPos.x - 1) % 32
+                    newPos.x = (newPos.x - 1) % boardWidth
                     num += code[newPos.y][newPos.x-offset]
                     extraHighlights.append(Vec2(newPos.x-offset, newPos.y))
                     updateCode(False, extraHighlights)
                 elif direction == DIRECTION.RIGHT:
-                    newPos.x = (newPos.x + 1) % 32
+                    newPos.x = (newPos.x + 1) % boardWidth
                     num += code[newPos.y][newPos.x+offset]
                     extraHighlights.append(Vec2(newPos.x+offset, newPos.y))
                     updateCode(False, extraHighlights)
@@ -332,11 +341,11 @@ try:
                     parseDigitsForward(3,3)
                 )
             elif cmd == '/':
-                currentMemCell = (currentMemCell + 1) % 32
+                currentMemCell = (currentMemCell + 1) % memCellCount
             elif cmd == '\\':
-                currentMemCell = (currentMemCell - 1) % 32
+                currentMemCell = (currentMemCell - 1) % memCellCount
             elif cmd == '*':
-                currentMemCell = parseDigitsForward(3) % 32
+                currentMemCell = parseDigitsForward(3) % memCellCount
             elif cmd == '_':
                 scanForJumpForward()
                 start_time = time.time()
@@ -383,17 +392,17 @@ try:
                     start_time = time.time()
                     
                     if direction == DIRECTION.UP:
-                        updateCode(False, [ Vec2(beginPos.x, (beginPos.y - i) % 32) ], [ Vec2(beginPos.x, (beginPos.y - i) % 32) ])
-                        code[(beginPos.y-i) % 32][beginPos.x] = chr(codeContent.getch())
+                        updateCode(False, [ Vec2(beginPos.x, (beginPos.y - i) % boardHeight) ], [ Vec2(beginPos.x, (beginPos.y - i) % boardHeight) ])
+                        code[(beginPos.y-i) % boardHeight][beginPos.x] = chr(codeContent.getch())
                     elif direction == DIRECTION.DOWN:
-                        updateCode(False, [ Vec2(beginPos.x, (beginPos.y + i) % 32) ], [ Vec2(beginPos.x, (beginPos.y + i) % 32) ])
-                        code[(beginPos.y+i) % 32][beginPos.x] = chr(codeContent.getch())
+                        updateCode(False, [ Vec2(beginPos.x, (beginPos.y + i) % boardHeight) ], [ Vec2(beginPos.x, (beginPos.y + i) % boardHeight) ])
+                        code[(beginPos.y+i) % boardHeight][beginPos.x] = chr(codeContent.getch())
                     elif direction == DIRECTION.LEFT:
-                        updateCode(False, [ Vec2((beginPos.x - i) % 32, beginPos.y) ], [ Vec2((beginPos.x - i) % 32, beginPos.y) ])
-                        code[beginPos.y][(beginPos.x-i) % 32] = chr(codeContent.getch())
+                        updateCode(False, [ Vec2((beginPos.x - i) % boardWidth, beginPos.y) ], [ Vec2((beginPos.x - i) % boardWidth, beginPos.y) ])
+                        code[beginPos.y][(beginPos.x-i) % boardWidth] = chr(codeContent.getch())
                     elif direction == DIRECTION.RIGHT:
-                        updateCode(False, [ Vec2((beginPos.x + i) % 32, beginPos.y) ], [ Vec2((beginPos.x + i) % 32, beginPos.y) ])
-                        code[beginPos.y][(beginPos.x+i) % 32] = chr(codeContent.getch())
+                        updateCode(False, [ Vec2((beginPos.x + i) % boardWidth, beginPos.y) ], [ Vec2((beginPos.x + i) % boardWidth, beginPos.y) ])
+                        code[beginPos.y][(beginPos.x+i) % boardWidth] = chr(codeContent.getch())
                     
                     while time.time() - start_time < 1/commandsPerSecond:
                         pass
@@ -413,25 +422,25 @@ try:
                 break
             elif cmd == '\'':
                 if direction == DIRECTION.UP:
-                        pos.y = (pos.y - 1) % 32
+                        pos.y = (pos.y - 1) % boardHeight
                 elif direction == DIRECTION.DOWN:
-                        pos.y = (pos.y + 1) % 32
+                        pos.y = (pos.y + 1) % boardHeight
                 elif direction == DIRECTION.LEFT:
-                        pos.x = (pos.x - 1) % 32
+                        pos.x = (pos.x - 1) % boardWidth
                 elif direction == DIRECTION.RIGHT:
-                        pos.x = (pos.x + 1) % 32
+                        pos.x = (pos.x + 1) % boardWidth
                         
                 while code[pos.y][pos.x] != '\'':
                     start_time = time.time()
                             
                     if direction == DIRECTION.UP:
-                            pos.y = (pos.y - 1) % 32
+                            pos.y = (pos.y - 1) % boardHeight
                     elif direction == DIRECTION.DOWN:
-                            pos.y = (pos.y + 1) % 32
+                            pos.y = (pos.y + 1) % boardHeight
                     elif direction == DIRECTION.LEFT:
-                            pos.x = (pos.x - 1) % 32
+                            pos.x = (pos.x - 1) % boardWidth
                     elif direction == DIRECTION.RIGHT:
-                            pos.x = (pos.x + 1) % 32
+                            pos.x = (pos.x + 1) % boardWidth
                             
                     updateCode(True)
                             
@@ -439,28 +448,28 @@ try:
                         pass
             elif cmd == '"':
                 if direction == DIRECTION.UP:
-                        pos.y = (pos.y - 1) % 32
+                        pos.y = (pos.y - 1) % boardHeight
                 elif direction == DIRECTION.DOWN:
-                        pos.y = (pos.y + 1) % 32
+                        pos.y = (pos.y + 1) % boardHeight
                 elif direction == DIRECTION.LEFT:
-                        pos.x = (pos.x - 1) % 32
+                        pos.x = (pos.x - 1) % boardWidth
                 elif direction == DIRECTION.RIGHT:
-                        pos.x = (pos.x + 1) % 32
+                        pos.x = (pos.x + 1) % boardWidth
                         
                 while code[pos.y][pos.x] != '"':
                     start_time = time.time()
                     
                     memory[currentMemCell] = ord(code[pos.y][pos.x])
-                    currentMemCell = (currentMemCell + 1) % 32
+                    currentMemCell = (currentMemCell + 1) % memCellCount
                             
                     if direction == DIRECTION.UP:
-                            pos.y = (pos.y - 1) % 32
+                            pos.y = (pos.y - 1) % boardHeight
                     elif direction == DIRECTION.DOWN:
-                            pos.y = (pos.y + 1) % 32
+                            pos.y = (pos.y + 1) % boardHeight
                     elif direction == DIRECTION.LEFT:
-                            pos.x = (pos.x - 1) % 32
+                            pos.x = (pos.x - 1) % boardWidth
                     elif direction == DIRECTION.RIGHT:
-                            pos.x = (pos.x + 1) % 32
+                            pos.x = (pos.x + 1) % boardWidth
                             
                     reRender(True)
                         
@@ -468,13 +477,13 @@ try:
                         pass
             elif cmd == 'w':
                 if direction == DIRECTION.UP:
-                        pos.y = (pos.y - 1) % 32
+                        pos.y = (pos.y - 1) % boardHeight
                 elif direction == DIRECTION.DOWN:
-                        pos.y = (pos.y + 1) % 32
+                        pos.y = (pos.y + 1) % boardHeight
                 elif direction == DIRECTION.LEFT:
-                        pos.x = (pos.x - 1) % 32
+                        pos.x = (pos.x - 1) % boardWidth
                 elif direction == DIRECTION.RIGHT:
-                        pos.x = (pos.x + 1) % 32
+                        pos.x = (pos.x + 1) % boardWidth
                         
                 while code[pos.y][pos.x] != 'w':
                     start_time = time.time()
@@ -482,13 +491,13 @@ try:
                     outputContent.addch(code[pos.y][pos.x])
                             
                     if direction == DIRECTION.UP:
-                            pos.y = (pos.y - 1) % 32
+                            pos.y = (pos.y - 1) % boardHeight
                     elif direction == DIRECTION.DOWN:
-                            pos.y = (pos.y + 1) % 32
+                            pos.y = (pos.y + 1) % boardHeight
                     elif direction == DIRECTION.LEFT:
-                            pos.x = (pos.x - 1) % 32
+                            pos.x = (pos.x - 1) % boardWidth
                     elif direction == DIRECTION.RIGHT:
-                            pos.x = (pos.x + 1) % 32
+                            pos.x = (pos.x + 1) % boardWidth
                         
                     reRender(True)
                         
@@ -497,13 +506,13 @@ try:
                         
                 
             if direction == DIRECTION.UP:
-                pos.y = (pos.y - 1) % 32
+                    pos.y = (pos.y - 1) % boardHeight
             elif direction == DIRECTION.DOWN:
-                pos.y = (pos.y + 1) % 32
+                    pos.y = (pos.y + 1) % boardHeight
             elif direction == DIRECTION.LEFT:
-                pos.x = (pos.x - 1) % 32
+                    pos.x = (pos.x - 1) % boardWidth
             elif direction == DIRECTION.RIGHT:
-                pos.x = (pos.x + 1) % 32
+                    pos.x = (pos.x + 1) % boardWidth
                 
             
             reRender()
@@ -521,11 +530,12 @@ try:
     fp = args.file
     f = open(fp, "r")
     source = [
-        [" " for x in range(32)] for y in range(32)
+        [" " for x in range(boardWidth)] for y in range(boardHeight)
     ]
+    
 
-    for y,l in enumerate(f.readlines()[:32]):
-        for x,c in enumerate(l.strip("\n")[:32]):
+    for y,l in enumerate(f.readlines()[:boardHeight]):
+        for x,c in enumerate(l.strip("\n")[:boardWidth]):
             source[y][x] = c
     f.close()
 

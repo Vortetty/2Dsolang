@@ -17,5 +17,5 @@ IF ERRORLEVEL 1 (
     set executable = py
 )
 
-%executable% test_for_curses.py
+%executable% test_for_windows_libs.py
 %executable% main.py -n %*
