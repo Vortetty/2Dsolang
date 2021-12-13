@@ -1,3 +1,7 @@
+#
+# Converts Brainfuck to 2Dsolang
+#
+
 import argparse
 
 parser = argparse.ArgumentParser(description='Generate 2Dsolang from Brainfuck.')
