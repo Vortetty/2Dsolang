@@ -105,7 +105,6 @@ try:
         outputContent = outputBox.derwin((max(boardHeight, memCellCount) + 1) - 7, 64, 1, 1)
         codeHistoryContent = codeHistoryBox.derwin(5, 64, 1, 1)
         
-        subprocess.run(["/usr/bin/notify-send", "--icon=error", f"{len(list(enumerate(list(enumerate(code))[0][1])))}, {len(list(enumerate(code)))}"])
         for index in range(boardHeight*boardWidth):
             x = int(index % boardWidth)
             y = int(index / boardWidth)
