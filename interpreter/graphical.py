@@ -102,19 +102,19 @@ def main(stdscr: _curses.window, code, memCellCount, boardWidth, boardHeight, cp
     memBox.box()
     memBox.refresh()
     memBox.nodelay(False)
-    outputBox = stdscr.derwin((max(boardHeight, memCellCount)) + 2 - 7, 66, 0, boardWidth*2+2+5)
+    outputBox = stdscr.derwin((max(boardHeight, memCellCount)) + 2 - 9, 66, 0, boardWidth*2+2+5)
     outputBox.box()
     outputBox.refresh()
     outputBox.nodelay(False)
-    codeHistoryBox = stdscr.derwin(7, 66, (max(boardHeight, memCellCount)) + 2 - 7, boardWidth*2+2+5)
+    codeHistoryBox = stdscr.derwin(9, 66, (max(boardHeight, memCellCount)) + 2 - 9, boardWidth*2+2+5)
     codeHistoryBox.box()
     codeHistoryBox.refresh()
     codeHistoryBox.nodelay(False)
     
     codeContent = codeBox.derwin((max(boardHeight, memCellCount) + 1), boardWidth*2, 1, 1)
     memContent = memBox.derwin((max(boardHeight, memCellCount) + 1), 3, 1, 1)
-    outputContent = outputBox.derwin((max(boardHeight, memCellCount)) - 7, 64, 1, 1)
-    codeHistoryContent = codeHistoryBox.derwin(5, 64, 1, 1)
+    outputContent = outputBox.derwin((max(boardHeight, memCellCount)) - 9, 64, 1, 1)
+    codeHistoryContent = codeHistoryBox.derwin(7, 64, 1, 1)
     
     for index in range(boardHeight*boardWidth):
         x = int(index % boardWidth)
@@ -330,7 +330,7 @@ def main(stdscr: _curses.window, code, memCellCount, boardWidth, boardHeight, cp
         elif cmd == 'n':
             tmp = (parseDigitsForward(3) % 256)
             memory[currentMemCell] = (~(memory[currentMemCell] & tmp)) % 256
-            historyText.newLine("Nanded memory cell " + str(currentMemCell) + " with " + str(tmp) + " to " + str(memory[currentMemCell]))
+            historyText.newLine("NANDed memory cell " + str(currentMemCell) + " with " + str(tmp) + " to " + str(memory[currentMemCell]))
         elif cmd == 'z':
             memory[currentMemCell] = 0
             historyText.newLine("Zeroed memory cell " + str(currentMemCell))
@@ -354,99 +354,182 @@ def main(stdscr: _curses.window, code, memCellCount, boardWidth, boardHeight, cp
             memory[tmp] = parseDigitsForward(3, 3) % 256 
             historyText.newLine("Set memory cell " + str(tmp) + " to " + str(memory[tmp]))
         elif cmd == 'x':
-            memory[currentMemCell] = math.floor(memory[currentMemCell]*parseDigitsForward(3))
+            tmp = parseDigitsForward(3)
+            memory[currentMemCell] = math.floor(memory[currentMemCell]*tmp)
+            historyText.newLine("Multiplied memory cell " + str(currentMemCell) + " by " + str(tmp) + " to " + str(memory[currentMemCell]))
         elif cmd == 'd':
-            memory[currentMemCell] = math.floor(memory[currentMemCell]/parseDigitsForward(3))
+            tmp = parseDigitsForward(3)
+            memory[currentMemCell] = math.floor(memory[currentMemCell]/tmp)
+            historyText.newLine("Divided memory cell " + str(currentMemCell) + " by " + str(tmp) + " to " + str(memory[currentMemCell]))
         elif cmd == 'X':
-            memory[currentMemCell] = math.floor(memory[parseDigitsForward(3)]*parseDigitsForward(3, 3))
+            tmp = parseDigitsForward(3)
+            tmp1 = parseDigitsForward(3, 3)
+            memory[currentMemCell] = math.floor(memory[tmp]*tmp1)
+            historyText.newLine("Multiplied memory cell " + str(tmp) + " by " + str(tmp1) + " to " + str(memory[currentMemCell]))
         elif cmd == 'D':
-            memory[currentMemCell] = math.floor(memory[parseDigitsForward(3)]/parseDigitsForward(3, 3))
+            tmp = parseDigitsForward(3)
+            tmp1 = parseDigitsForward(3, 3)
+            memory[currentMemCell] = math.floor(memory[tmp]/tmp1)
+            historyText.newLine("Divided memory cell " + str(tmp) + " by " + str(tmp1) + " to " + str(memory[currentMemCell]))
         elif cmd == '!':
+            tmp = parseDigitsForward(3)
+            tmp1 = parseDigitsForward(3, 3)
             memory[currentMemCell] = random.randint(
                 parseDigitsForward(3),
                 parseDigitsForward(3,3)
             )
+            historyText.newLine("Randomly set memory cell " + str(currentMemCell) + " to " + str(memory[currentMemCell]) + " with random number " + str(tmp) + "-" + str(tmp1))
         elif cmd == '/':
             currentMemCell = (currentMemCell + 1) % memCellCount
+            historyText.newLine("Moved to memory cell " + str(currentMemCell))
         elif cmd == '\\':
             currentMemCell = (currentMemCell - 1) % memCellCount
+            historyText.newLine("Moved to memory cell " + str(currentMemCell))
         elif cmd == '*':
             currentMemCell = parseDigitsForward(3) % memCellCount
+            historyText.newLine("Moved to memory cell " + str(currentMemCell))
         elif cmd == '_':
+            tmp = "Jumped from " + str(pos) + " to "
             scanForJumpForward()
+            tmp += str(pos)
+            historyText.newLine(tmp)
             start_time = time.time()
         elif cmd == '.':
-            if (parseDigitsForward(3) == memory[currentMemCell]):
+            tmp = parseDigitsForward(3)
+            if (tmp == memory[currentMemCell]):
+                tmp = "Jumped from " + str(pos) + " to "
                 scanForJumpForward()
+                tmp += str(pos)
+                historyText.newLine(tmp)
+            else:
+                historyText.newLine("Did not jump because memory cell " + str(currentMemCell) + " is not equal to " + str(tmp))
             start_time = time.time()
         elif cmd == ':':
-            if (parseDigitsForward(3) != memory[currentMemCell]):
+            tmp = parseDigitsForward(3)
+            if (tmp != memory[currentMemCell]):
+                tmp = "Jumped from " + str(pos) + " to "
                 scanForJumpForward()
+                tmp += str(pos)
+                historyText.newLine(tmp)
+            else:
+                historyText.newLine("Did not jump because memory cell " + str(currentMemCell) + " is equal to " + str(tmp))
             start_time = time.time()
         elif cmd == 'g':
-            if (parseDigitsForward(3) > memory[currentMemCell]):
+            tmp = parseDigitsForward(3)
+            if (tmp > memory[currentMemCell]):
+                tmp = "Jumped from " + str(pos) + " to "
                 scanForJumpForward()
+                tmp += str(pos)
+                historyText.newLine(tmp)
+            else:
+                historyText.newLine("Did not jump because memory cell " + str(currentMemCell) + " is not greater than " + str(tmp))
             start_time = time.time()
         elif cmd == 'l':
-            if (parseDigitsForward(3) < memory[currentMemCell]):
+            tmp = parseDigitsForward(3)
+            if (tmp < memory[currentMemCell]):
+                tmp = "Jumped from " + str(pos) + " to "
                 scanForJumpForward()
+                tmp += str(pos)
+                historyText.newLine(tmp)
+            else:
+                historyText.newLine("Did not jump because memory cell " + str(currentMemCell) + " is not less than " + str(tmp))
             start_time = time.time()
         elif cmd == '=':
-            scanForJumpBackward()
+            tmp = "Jumped from " + str(pos) + " to "
+            scanForJumpForward()
+            tmp += str(pos)
+            historyText.newLine(tmp)
             start_time = time.time()
         elif cmd == ',':
-            if (parseDigitsForward(3) == memory[currentMemCell]):
+            tmp = parseDigitsForward(3)
+            if (tmp == memory[currentMemCell]):
+                tmp = "Jumped from " + str(pos) + " to "
                 scanForJumpBackward()
+                tmp += str(pos)
+                historyText.newLine(tmp)
+            else:
+                historyText.newLine("Did not jump because memory cell " + str(currentMemCell) + " != " + str(tmp))
             start_time = time.time()
         elif cmd == ';':
-            if (parseDigitsForward(3) != memory[currentMemCell]):
+            tmp = parseDigitsForward(3)
+            if (tmp != memory[currentMemCell]):
+                tmp = "Jumped from " + str(pos) + " to "
                 scanForJumpBackward()
+                tmp += str(pos)
+                historyText.newLine(tmp)
+            else:
+                historyText.newLine("Did not jump because memory cell " + str(currentMemCell) + " == " + str(tmp))
             start_time = time.time()
         elif cmd == 'G':
-            if (parseDigitsForward(3) > memory[currentMemCell]):
+            tmp = parseDigitsForward(3)
+            if (tmp > memory[currentMemCell]):
+                tmp = "Jumped from " + str(pos) + " to "
                 scanForJumpBackward()
+                tmp += str(pos)
+                historyText.newLine(tmp)
+            else:
+                historyText.newLine("Did not jump because memory cell " + str(currentMemCell) + " >= " + str(tmp))
             start_time = time.time()
         elif cmd == 'L':
-            if (parseDigitsForward(3) < memory[currentMemCell]):
+            tmp = parseDigitsForward(3)
+            if (tmp < memory[currentMemCell]):
+                tmp = "Jumped from " + str(pos) + " to "
                 scanForJumpBackward()
+                tmp += str(pos)
+                historyText.newLine(tmp)
+            else:
+                historyText.newLine("Did not jump because memory cell " + str(currentMemCell) + " <= " + str(tmp))
             start_time = time.time()
         elif cmd == '$':
+            tmp = parseDigitsForward(3)
             x = parseDigitsForward(3, 3)
             y = parseDigitsForward(3, 6)
             beginPos = Vec2(x, y)
-            for i in range(parseDigitsForward(3)):
+            historyText.newLine("Asking for " + str(tmp) + " lines of input at " + str(beginPos))
+            written = ""
+            for i in range(tmp):
                 start_time = time.time()
                 
                 if direction == DIRECTION.UP:
                     updateCode(False, [ Vec2(beginPos.x, (beginPos.y - i) % boardHeight) ], [ Vec2(beginPos.x, (beginPos.y - i) % boardHeight) ])
                     code[(beginPos.y-i) % boardHeight][beginPos.x] = chr(codeContent.getch())
+                    written += code[(beginPos.y-i) % boardHeight][beginPos.x]
                 elif direction == DIRECTION.DOWN:
                     updateCode(False, [ Vec2(beginPos.x, (beginPos.y + i) % boardHeight) ], [ Vec2(beginPos.x, (beginPos.y + i) % boardHeight) ])
                     code[(beginPos.y+i) % boardHeight][beginPos.x] = chr(codeContent.getch())
+                    written += code[(beginPos.y+i) % boardHeight][beginPos.x]
                 elif direction == DIRECTION.LEFT:
                     updateCode(False, [ Vec2((beginPos.x - i) % boardWidth, beginPos.y) ], [ Vec2((beginPos.x - i) % boardWidth, beginPos.y) ])
                     code[beginPos.y][(beginPos.x-i) % boardWidth] = chr(codeContent.getch())
+                    written += code[beginPos.y][(beginPos.x-i) % boardWidth]
                 elif direction == DIRECTION.RIGHT:
                     updateCode(False, [ Vec2((beginPos.x + i) % boardWidth, beginPos.y) ], [ Vec2((beginPos.x + i) % boardWidth, beginPos.y) ])
                     code[beginPos.y][(beginPos.x+i) % boardWidth] = chr(codeContent.getch())
+                    written += code[beginPos.y][(beginPos.x+i) % boardWidth]
                 
                 while time.time() - start_time < 1/commandsPerSecond:
                     pass
-            
+            historyText.newLine("Input written: " + written)
             start_time = time.time()
         elif cmd == 'i':
             memory[currentMemCell] = codeContent.getch()
+            historyText.newLine("Set memory cell " + str(currentMemCell) + " to " + str(memory[currentMemCell]) + " from user input")
         elif cmd == '%':
             outputText.appendChar(chr(memory[currentMemCell]))
+            historyText.newLine("Output \"" + chr(memory[currentMemCell]) + "\" to console")
         elif cmd == '&':
             outputText.appendChar(str(memory[currentMemCell]))
+            historyText.newLine("Output \"" + str(memory[currentMemCell]) + "\" to console")
         elif cmd == '@':
             x = parseDigitsForward(3)
             y = parseDigitsForward(3, 3)
             outputText.appendChar(code[y][x])
+            historyText.newLine("Output \"" + code[y][x] + "\" to console from position " + str(Vec2(x, y)))
         elif cmd == '~':
+            historyText.newLine("Exiting")
             break
         elif cmd == '\'':
+            historyText.newLine("Entered skip mode")
             if direction == DIRECTION.UP:
                     pos.y = (pos.y - 1) % boardHeight
             elif direction == DIRECTION.DOWN:
@@ -472,7 +555,9 @@ def main(stdscr: _curses.window, code, memCellCount, boardWidth, boardHeight, cp
                         
                 while time.time() - start_time < 1/commandsPerSecond:
                     pass
+            historyText.newLine("Exited skip mode")
         elif cmd == '"':
+            historyText.newLine("Entered write to memory mode")
             if direction == DIRECTION.UP:
                     pos.y = (pos.y - 1) % boardHeight
             elif direction == DIRECTION.DOWN:
@@ -501,7 +586,9 @@ def main(stdscr: _curses.window, code, memCellCount, boardWidth, boardHeight, cp
                     
                 while time.time() - start_time < 1/commandsPerSecond:
                     pass
+            historyText.newLine("Exited write to memory mode")
         elif cmd == 'w':
+            historyText.newLine("Entered write to console mode")
             if direction == DIRECTION.UP:
                     pos.y = (pos.y - 1) % boardHeight
             elif direction == DIRECTION.DOWN:
@@ -529,6 +616,7 @@ def main(stdscr: _curses.window, code, memCellCount, boardWidth, boardHeight, cp
                     
                 while time.time() - start_time < 1/commandsPerSecond:
                     pass
+            historyText.newLine("Exited write to console mode")
                     
             
         if direction == DIRECTION.UP:
