@@ -33,6 +33,45 @@ class Vec2:
     
     def __str__(self) -> str:
         return f"({self.x}, {self.y})"
+    
+class textManager:
+    def __init__(self, width, height, preInitialize=False):
+        if preInitialize:
+            self.lines = [
+                " "*width for i in range(height)
+            ]
+        else:
+            self.lines = []
+        self.width = width
+        self.height = height
+        
+    def newLine(self, line):
+        for x in line.split("\n"):
+            self.lines.extend(
+                i.ljust(self.width, " ").strip("\n") for i in textwrap.wrap(x, self.width, subsequent_indent=" ", replace_whitespace=False)
+            )
+        self.lines = self.lines[-self.height:]
+        
+    def appendChar(self, line):
+        if line == "\n":
+            self.lines.append(" "*self.width)
+        else:
+            tmp = self.lines.pop(-1).strip(" ") if len(self.lines) > 0 else ""
+            self.lines.extend(
+                i.ljust(self.width, " ") for i in textwrap.wrap(tmp+line, self.width, subsequent_indent=" ", replace_whitespace=False)
+            )
+        self.lines = self.lines[-self.height:]
+        
+    def writeToDisplay(self, stdscr: _curses.window):
+        stdscr.clear()
+        for y, line in enumerate(self.lines):
+            for x, char in enumerate(line):
+                #print(x, y)
+                try:
+                    stdscr.addch(y, x, char)
+                except:
+                    pass
+            #stdscr.addstr(line[:self.width])
         
 def addToHistory(historyText: list, text: list):
     for t in text:
@@ -51,30 +90,30 @@ def main(stdscr: _curses.window, code, memCellCount, boardWidth, boardHeight, cp
     curses.delay_output(0)
     
     stdscr.clear()
-    curses.resize_term((max(boardHeight, memCellCount) + 1) + 2, boardWidth*2 + boardWidth*2+2 + 2 + 5)
+    curses.resize_term((max(boardHeight, memCellCount)) + 2, boardWidth*2 + boardWidth*2+2 + 2 + 5)
     stdscr.box()
     stdscr.refresh()
     stdscr.nodelay(True)
-    codeBox = stdscr.derwin((max(boardHeight, memCellCount) + 1) + 2, boardWidth*2+2, 0, 0)
+    codeBox = stdscr.derwin((max(boardHeight, memCellCount)) + 2, boardWidth*2+2, 0, 0)
     codeBox.box()
     codeBox.refresh()
     codeBox.nodelay(False)
-    memBox = stdscr.derwin((max(boardHeight, memCellCount) + 1) + 2, 5, 0, boardWidth*2+2)
+    memBox = stdscr.derwin((max(boardHeight, memCellCount)) + 2, 5, 0, boardWidth*2+2)
     memBox.box()
     memBox.refresh()
     memBox.nodelay(False)
-    outputBox = stdscr.derwin((max(boardHeight, memCellCount) + 1) + 2 - 7, 66, 0, boardWidth*2+2+5)
+    outputBox = stdscr.derwin((max(boardHeight, memCellCount)) + 2 - 7, 66, 0, boardWidth*2+2+5)
     outputBox.box()
     outputBox.refresh()
     outputBox.nodelay(False)
-    codeHistoryBox = stdscr.derwin(7, 66, (max(boardHeight, memCellCount) + 1) + 2 - 7, boardWidth*2+2+5)
+    codeHistoryBox = stdscr.derwin(7, 66, (max(boardHeight, memCellCount)) + 2 - 7, boardWidth*2+2+5)
     codeHistoryBox.box()
     codeHistoryBox.refresh()
     codeHistoryBox.nodelay(False)
     
     codeContent = codeBox.derwin((max(boardHeight, memCellCount) + 1), boardWidth*2, 1, 1)
     memContent = memBox.derwin((max(boardHeight, memCellCount) + 1), 3, 1, 1)
-    outputContent = outputBox.derwin((max(boardHeight, memCellCount) + 1) - 7, 64, 1, 1)
+    outputContent = outputBox.derwin((max(boardHeight, memCellCount)) - 7, 64, 1, 1)
     codeHistoryContent = codeHistoryBox.derwin(5, 64, 1, 1)
     
     for index in range(boardHeight*boardWidth):
@@ -87,12 +126,8 @@ def main(stdscr: _curses.window, code, memCellCount, boardWidth, boardHeight, cp
     outputContent.refresh()
     codeHistoryContent.refresh()
     
-    outputText = [
-        [] for i in range(outputContent.getmaxyx()[0])
-    ]
-    historyText = [
-        [] for i in range(codeHistoryContent.getmaxyx()[0])
-    ]
+    outputText = textManager(outputContent.getmaxyx()[1], outputContent.getmaxyx()[0])
+    historyText = textManager(codeHistoryContent.getmaxyx()[1], codeHistoryContent.getmaxyx()[0])
     memory = [
         0 for i in range(memCellCount)
     ]
@@ -120,7 +155,10 @@ def main(stdscr: _curses.window, code, memCellCount, boardWidth, boardHeight, cp
         memContent.refresh()
     
     def updateOutputs():
+        outputText.writeToDisplay(outputContent)
         outputContent.refresh()
+        
+        historyText.writeToDisplay(codeHistoryContent)
         codeHistoryContent.refresh()
         
     def clearAll():
@@ -270,34 +308,51 @@ def main(stdscr: _curses.window, code, memCellCount, boardWidth, boardHeight, cp
         #
         if cmd == '^':
             direction = DIRECTION.UP
+            historyText.newLine("Changed direction to Up")
         elif cmd == 'v':
             direction = DIRECTION.DOWN
+            historyText.newLine("Changed direction to Down")
         elif cmd == '<':
             direction = DIRECTION.LEFT
+            historyText.newLine("Changed direction to Left")
         elif cmd == '>':
             direction = DIRECTION.RIGHT
+            historyText.newLine("Changed direction to Right")
         elif cmd == '?':
             direction = random.choice([DIRECTION.UP, DIRECTION.DOWN, DIRECTION.LEFT, DIRECTION.RIGHT])
+            historyText.newLine("Randomly changed direction to " + direction.name.capitalize())
         elif cmd == '+':
             memory[currentMemCell] = (memory[currentMemCell] + 1) % 256 
+            historyText.newLine("Incremented memory cell " + str(currentMemCell) + " to " + str(memory[currentMemCell]))
         elif cmd == '-':
             memory[currentMemCell] = (memory[currentMemCell] - 1) % 256 
+            historyText.newLine("Decremented memory cell " + str(currentMemCell) + " to " + str(memory[currentMemCell]))
         elif cmd == 'n':
-            memory[currentMemCell] = (~(memory[currentMemCell] & (parseDigitsForward(3) % 256))) % 256
+            tmp = (parseDigitsForward(3) % 256)
+            memory[currentMemCell] = (~(memory[currentMemCell] & tmp)) % 256
+            historyText.newLine("Nanded memory cell " + str(currentMemCell) + " with " + str(tmp) + " to " + str(memory[currentMemCell]))
         elif cmd == 'z':
             memory[currentMemCell] = 0
+            historyText.newLine("Zeroed memory cell " + str(currentMemCell))
         elif cmd == 's':
             memory[currentMemCell] = parseDigitsForward(3) % 256 
+            historyText.newLine("Set memory cell " + str(currentMemCell) + " to " + str(memory[currentMemCell]))
         elif cmd == 'p':
             tmp = parseDigitsForward(3)
             memory[tmp] = (memory[tmp] + 1) % 256 
+            historyText.newLine("Incremented memory cell " + str(tmp) + " to " + str(memory[tmp]))
         elif cmd == 'm':
             tmp = parseDigitsForward(3)
             memory[tmp] = (memory[tmp] - 1) % 256 
+            historyText.newLine("Decremented memory cell " + str(tmp) + " to " + str(memory[tmp]))
         elif cmd == 'Z':
-            memory[parseDigitsForward(3)] = 0
+            tmp = parseDigitsForward(3)
+            memory[tmp] = 0
+            historyText.newLine("Zeroed memory cell " + str(tmp))
         elif cmd == 'S':
-            memory[parseDigitsForward(3)] = parseDigitsForward(3, 3) % 256 
+            tmp = parseDigitsForward(3)
+            memory[tmp] = parseDigitsForward(3, 3) % 256 
+            historyText.newLine("Set memory cell " + str(tmp) + " to " + str(memory[tmp]))
         elif cmd == 'x':
             memory[currentMemCell] = math.floor(memory[currentMemCell]*parseDigitsForward(3))
         elif cmd == 'd':
@@ -382,13 +437,13 @@ def main(stdscr: _curses.window, code, memCellCount, boardWidth, boardHeight, cp
         elif cmd == 'i':
             memory[currentMemCell] = codeContent.getch()
         elif cmd == '%':
-            outputContent.addch(chr(memory[currentMemCell]))
+            outputText.appendChar(chr(memory[currentMemCell]))
         elif cmd == '&':
-            outputContent.addstr(str(memory[currentMemCell]))
+            outputText.appendChar(str(memory[currentMemCell]))
         elif cmd == '@':
             x = parseDigitsForward(3)
             y = parseDigitsForward(3, 3)
-            outputContent.addch(code[y][x])
+            outputText.appendChar(code[y][x])
         elif cmd == '~':
             break
         elif cmd == '\'':
@@ -459,7 +514,7 @@ def main(stdscr: _curses.window, code, memCellCount, boardWidth, boardHeight, cp
             while code[pos.y][pos.x] != 'w':
                 start_time = time.time()
                 
-                outputContent.addch(code[pos.y][pos.x])
+                outputText.appendChar(code[pos.y][pos.x])
                         
                 if direction == DIRECTION.UP:
                         pos.y = (pos.y - 1) % boardHeight
@@ -491,7 +546,8 @@ def main(stdscr: _curses.window, code, memCellCount, boardWidth, boardHeight, cp
         while time.time() - start_time < 1/commandsPerSecond:
             pass
         
-    outputContent.addstr("\nPress enter to exit")
+    outputText.newLine("\nPress enter to exit")
+    outputText.writeToDisplay(outputContent)
     outputContent.refresh()
     while stdscr.getch() != -1:
         pass
