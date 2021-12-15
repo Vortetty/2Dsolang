@@ -436,7 +436,7 @@ def main(stdscr: _curses.window, code, memCellCount, boardWidth, boardHeight, cp
             start_time = time.time()
         elif cmd == '=':
             tmp = "Jumped from " + str(pos) + " to "
-            scanForJumpForward()
+            scanForJumpBackward()
             tmp += str(pos)
             historyText.newLine(tmp)
             start_time = time.time()
