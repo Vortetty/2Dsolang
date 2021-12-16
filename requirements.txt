@@ -1,5 +1,1 @@
-numba
-scipy
-colorama
-pyyaml
-icc_rt; platform.machine == 'x86_64' and sys.platform == 'linux'
+pyjion
