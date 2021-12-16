@@ -6,6 +6,8 @@ To run the interpreter, simply run: (it is cross-platform, the bat extension is 
   - Note: this requires a curses binary from [here](https://www.lfd.uci.edu/~gohlke/pythonlibs/#curses) due to python not coming with curses windows support by default
 - `./run-crossplatform.bat [-c COMMANDS_PER_SECOND] <filename>` for linux/mac
 
+You can see a speedup through JIT compilation by installing dotnet 6, do not expact a massive speedup, an interpreter can still only be so fast.
+
 all code takes place on a 2d grid (included interpreter supports 32x32 code and 32 bytes of memory), any character that isn't defined as a command is treated as a noop unless part of a command
 the max memory for this revision is 256 bytes, though this can be increased by modifying the parsing logic(it is just one variable)
 code starts at the top left corner of the grid, by default it will execute left to right

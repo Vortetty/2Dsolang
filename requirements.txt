@@ -1,3 +1,1 @@
-tones
-simpleaudio
-pydub
+pyjion

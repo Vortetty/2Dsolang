@@ -1,3 +1,9 @@
+
+try:
+    import pyjion
+    pyjion.config(level=2)
+    pyjion.enable()
+except: pass
 from curses import wrapper
 import curses
 import _curses

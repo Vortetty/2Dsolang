@@ -5,6 +5,11 @@
 
 ELVM_DIR = "linux-x64-elvm"
 
+try:
+    import pyjion
+    pyjion.config(level=2)
+    pyjion.enable()
+except: pass
 import os
 import argparse
 

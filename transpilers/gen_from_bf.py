@@ -2,6 +2,11 @@
 # Converts Brainfuck to 2Dsolang
 #
 
+try:
+    import pyjion
+    pyjion.config(level=2)
+    pyjion.enable()
+except: pass
 import argparse
 
 parser = argparse.ArgumentParser(description='Generate 2Dsolang from Brainfuck.')

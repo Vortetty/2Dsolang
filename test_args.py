@@ -1,3 +1,8 @@
+try:
+    import pyjion
+    pyjion.config(level=2)
+    pyjion.enable()
+except: pass
 import argparse
 import gettext
 import sys
