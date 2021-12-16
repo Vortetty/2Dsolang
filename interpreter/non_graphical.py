@@ -54,34 +54,30 @@ class Vec2:
 class textManager:
     def __init__(self, width, height, preInitialize=False):
         if preInitialize:
-            self.lines = [
+            self.full_lines = [
                 " "*width for i in range(height)
             ]
         else:
-            self.lines = []
+            self.full_lines = []
         self.width = width
         self.height = height
         
     def newLine(self, line):
         for x in line.split("\n"):
-            self.lines.extend(
-                i.ljust(self.width, " ").strip("\n") for i in textwrap.wrap(x, self.width, subsequent_indent=" ", replace_whitespace=False, drop_whitespace=False)
-            )
-        self.lines = self.lines[-self.height:]
+            l = [i.ljust(self.width, " ").strip("\n") for i in textwrap.wrap(x, self.width, subsequent_indent=" ", replace_whitespace=False, drop_whitespace=False)]
+            self.full_lines.extend(l)
         
     def appendChar(self, line):
         if line == "\n":
-            self.lines.append(" "*self.width)
+            self.full_lines.append(" "*self.width)
         else:
-            tmp = self.lines.pop(-1).strip(" ") if len(self.lines) > 0 else ""
-            self.lines.extend(
-                i.ljust(self.width, " ") for i in textwrap.wrap(tmp+line, self.width, subsequent_indent=" ", replace_whitespace=False, drop_whitespace=False)
-            )
-        self.lines = self.lines[-self.height:]
+            tmp = self.full_lines.pop(-1).strip(" ") if len(self.full_lines) > 0 else ""
+            l = [i.ljust(self.width, " ").strip("\n") for i in textwrap.wrap(tmp+line, self.width, subsequent_indent=" ", replace_whitespace=False, drop_whitespace=False)]
+            self.full_lines.extend(l)
         
     def writeToDisplay(self, stdscr: _curses.window):
         stdscr.clear()
-        for y, line in enumerate(self.lines):
+        for y, line in enumerate(self.full_lines[-self.height:]):
             for x, char in enumerate(line):
                 #print(x, y)
                 try:
@@ -89,6 +85,10 @@ class textManager:
                 except:
                     pass
             #stdscr.addstr(line[:self.width])
+            
+    def writeToFile(self, filename: str):
+        with open(filename, "w") as f:
+            f.writelines(self.full_lines)
         
 def addToHistory(historyText: list, text: list):
     for t in text:
@@ -109,23 +109,23 @@ def main(stdscr: _curses.window, code, memCellCount, boardWidth, boardHeight, cp
     stdscr.clear()
     curses.resize_term(37, 133)
     #stdscr.box()
-    stdscr.addstr(0, 0, "┌ Program output: ┐")
-    stdscr.addstr(0, 67, "┌ Program log: ┐")
+    stdscr.addstr(0, 0, "╷ Program output ╷")
+    stdscr.addstr(0, 67, "╷ Program log ╷")
     stdscr.refresh()
     stdscr.nodelay(False)
     outputBox = stdscr.derwin(36, 66, 1, 0)
     outputBox.box()
-    outputBox.addstr(0, 0, "├─────────────────┴")
+    outputBox.addstr(0, 0, "├────────────────┴")
     outputBox.refresh()
     outputBox.nodelay(False)
     codeHistoryBox = stdscr.derwin(36, 66, 1, 67)
     codeHistoryBox.box()
-    codeHistoryBox.addstr(0, 0, "├──────────────┴")
+    codeHistoryBox.addstr(0, 0, "├─────────────┴")
     codeHistoryBox.refresh()
     codeHistoryBox.nodelay(False)
     
-    outputContent = outputBox.derwin(32, 64, 1, 1)
-    codeHistoryContent = codeHistoryBox.derwin(32, 64, 1, 1)
+    outputContent = outputBox.derwin(34, 64, 1, 1)
+    codeHistoryContent = codeHistoryBox.derwin(34, 64, 1, 1)
     
     outputContent.refresh()
     codeHistoryContent.refresh()
@@ -563,6 +563,7 @@ def main(stdscr: _curses.window, code, memCellCount, boardWidth, boardHeight, cp
     outputText.newLine("\nPress enter to exit")
     outputText.writeToDisplay(outputContent)
     outputContent.refresh()
+    stdscr.nodelay(True)
     while stdscr.getch() != -1:
         pass
     stdscr.nodelay(False)
