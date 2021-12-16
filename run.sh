@@ -54,4 +54,4 @@ kitty \
     -o font_size=11 \
     -o tab_bar_style=hidden \
     -d="$DIR" \
-    python3 ./main.py "$@" &
+    pypy3 ./main.py "$@" &

@@ -60,8 +60,8 @@ try:
         boardHeight = len(lines)
         boardWidth = max(len(line.strip("\n")) for line in lines)
         
-    print(f"{boardWidth}x{boardHeight}")
-    input()
+    #print(f"{boardWidth}x{boardHeight}")
+    #input()
     
     source = [
         [" " for x in range(boardWidth)] for y in range(boardHeight)
@@ -73,8 +73,8 @@ try:
             source[y][x] = c
     f.close()
     
-    print("`".join("".join(i) for i in source))
-    input()
+    #print("`".join("".join(i) for i in source))
+    #input()
 
     wrapper(main, source, memCellCount, boardWidth, boardHeight, args.cps)
     

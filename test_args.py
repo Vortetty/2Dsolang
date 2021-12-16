@@ -121,7 +121,3 @@ parser.add_argument("-e", "--height", type=int, default=32, help="Height of the 
 parser.add_argument("-g", "--no-text", help="Disable debug rendering, this also makes the board size dynamic and memory to have any number of cells, and instructions will execute as fast as possible", action="store_true")
 
 args = parser.parse_args()
-
-if args.help:
-    parser.print_help()
-    exit(0)

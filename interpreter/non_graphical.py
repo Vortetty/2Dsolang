@@ -49,7 +49,7 @@ class Vec2:
                 return False
     
     def __str__(self) -> str:
-        return f"({self.x}, {self.y})"
+        return "({}, {})".format(self.x, self.y)
     
 class textManager:
     def __init__(self, width, height, preInitialize=False):
@@ -66,7 +66,7 @@ class textManager:
         for x in line.split("\n"):
             l = [i.ljust(self.width, " ").strip("\n") for i in textwrap.wrap(x, self.width, subsequent_indent=" ", replace_whitespace=False, drop_whitespace=False)]
             self.full_lines.extend(l)
-        
+    
     def appendChar(self, line):
         if line == "\n":
             self.full_lines.append(" "*self.width)
@@ -74,8 +74,8 @@ class textManager:
             tmp = self.full_lines.pop(-1).strip(" ") if len(self.full_lines) > 0 else ""
             l = [i.ljust(self.width, " ").strip("\n") for i in textwrap.wrap(tmp+line, self.width, subsequent_indent=" ", replace_whitespace=False, drop_whitespace=False)]
             self.full_lines.extend(l)
-        
-    def writeToDisplay(self, stdscr: _curses.window):
+    
+    def writeToDisplay(self, stdscr: _curses.Window):
         stdscr.clear()
         for y, line in enumerate(self.full_lines[-self.height:]):
             for x, char in enumerate(line):
@@ -85,7 +85,7 @@ class textManager:
                 except:
                     pass
             #stdscr.addstr(line[:self.width])
-            
+    
     def writeToFile(self, filename: str):
         with open(filename, "w") as f:
             f.writelines(self.full_lines)
@@ -95,7 +95,7 @@ def addToHistory(historyText: list, text: list):
         historyText.append(t)
     del historyText[:text.len()]
         
-def main(stdscr: _curses.window, code, memCellCount, boardWidth, boardHeight, cps):
+def main(stdscr: _curses.Window, code, memCellCount, boardWidth, boardHeight, cps):
     global memory
     global pos
     global currentMemCell
@@ -107,25 +107,25 @@ def main(stdscr: _curses.window, code, memCellCount, boardWidth, boardHeight, cp
     curses.delay_output(0)
     
     stdscr.clear()
-    curses.resize_term(37, 133)
+    curses.resize_term(35, 133)
     #stdscr.box()
     stdscr.addstr(0, 0, "╷ Program output ╷")
     stdscr.addstr(0, 67, "╷ Program log ╷")
     stdscr.refresh()
     stdscr.nodelay(False)
-    outputBox = stdscr.derwin(36, 66, 1, 0)
+    outputBox = stdscr.derwin(34, 66, 1, 0)
     outputBox.box()
     outputBox.addstr(0, 0, "├────────────────┴")
     outputBox.refresh()
     outputBox.nodelay(False)
-    codeHistoryBox = stdscr.derwin(36, 66, 1, 67)
+    codeHistoryBox = stdscr.derwin(34, 66, 1, 67)
     codeHistoryBox.box()
     codeHistoryBox.addstr(0, 0, "├─────────────┴")
     codeHistoryBox.refresh()
     codeHistoryBox.nodelay(False)
     
-    outputContent = outputBox.derwin(34, 64, 1, 1)
-    codeHistoryContent = codeHistoryBox.derwin(34, 64, 1, 1)
+    outputContent = outputBox.derwin(32, 64, 1, 1)
+    codeHistoryContent = codeHistoryBox.derwin(32, 64, 1, 1)
     
     outputContent.refresh()
     codeHistoryContent.refresh()
