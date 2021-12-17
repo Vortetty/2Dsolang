@@ -80,13 +80,13 @@ class textManager:
             l = [i.ljust(self.width, " ").strip("\n") for i in textwrap.wrap(tmp+line, self.width, subsequent_indent=" ", replace_whitespace=False, drop_whitespace=False)]
             self.full_lines.extend(l)
     
-    def writeToDisplay(self, stdscr: _curses.Window):
-        stdscr.clear()
+    def writeToDisplay(self, scr: _curses.window):
+        scr.erase()
         for y, line in enumerate(self.full_lines[-self.height:]):
             for x, char in enumerate(line):
                 #print(x, y)
                 try:
-                    stdscr.addch(y, x, char)
+                    scr.addch(y, x, char)
                 except:
                     pass
             #stdscr.addstr(line[:self.width])
@@ -100,7 +100,7 @@ def addToHistory(historyText: list, text: list):
         historyText.append(t)
     del historyText[:text.len()]
         
-def main(stdscr: _curses.Window, code, memCellCount, boardWidth, boardHeight, cps):
+def main(stdscr: _curses.window, code, memCellCount, boardWidth, boardHeight, cps):
     global memory
     global pos
     global currentMemCell
@@ -111,7 +111,7 @@ def main(stdscr: _curses.Window, code, memCellCount, boardWidth, boardHeight, cp
     curses.use_default_colors()
     curses.delay_output(0)
     
-    stdscr.clear()
+    stdscr.erase()
     curses.resize_term(35, 133)
     #stdscr.box()
     stdscr.addstr(0, 0, "╷ Program output ╷")
@@ -160,7 +160,7 @@ def main(stdscr: _curses.Window, code, memCellCount, boardWidth, boardHeight, cp
         codeHistoryContent.refresh()
         
     def clearAll():
-        #stdscr.clear()
+        #stdscr.erase()
         #codeBox.clear()
         #codeContent.clear()
         #memBox.clear()
@@ -444,16 +444,16 @@ def main(stdscr: _curses.Window, code, memCellCount, boardWidth, boardHeight, cp
             for i in range(tmp):
                 
                 if direction == DIRECTION.UP:
-                    code[(beginPos.y-i) % boardHeight][beginPos.x] = chr(stdscr.getch())
+                    code[(beginPos.y-i) % boardHeight][beginPos.x] = chr(outputContent.getch())
                     written += code[(beginPos.y-i) % boardHeight][beginPos.x]
                 elif direction == DIRECTION.DOWN:
-                    code[(beginPos.y+i) % boardHeight][beginPos.x] = chr(stdscr.getch())
+                    code[(beginPos.y+i) % boardHeight][beginPos.x] = chr(outputContent.getch())
                     written += code[(beginPos.y+i) % boardHeight][beginPos.x]
                 elif direction == DIRECTION.LEFT:
-                    code[beginPos.y][(beginPos.x-i) % boardWidth] = chr(stdscr.getch())
+                    code[beginPos.y][(beginPos.x-i) % boardWidth] = chr(outputContent.getch())
                     written += code[beginPos.y][(beginPos.x-i) % boardWidth]
                 elif direction == DIRECTION.RIGHT:
-                    code[beginPos.y][(beginPos.x+i) % boardWidth] = chr(stdscr.getch())
+                    code[beginPos.y][(beginPos.x+i) % boardWidth] = chr(outputContent.getch())
                     written += code[beginPos.y][(beginPos.x+i) % boardWidth]
                     
             historyText.newLine("Input written: " + written)
@@ -461,7 +461,7 @@ def main(stdscr: _curses.Window, code, memCellCount, boardWidth, boardHeight, cp
         elif cmd == 'i':
             historyText.newLine("Asking for character to put into " + str(memory[currentMemCell]))
             reRender()
-            memory[currentMemCell] = stdscr.getch()
+            memory[currentMemCell] = outputContent.getch()
             historyText.newLine("Set memory cell " + str(currentMemCell) + " to " + str(memory[currentMemCell]) + " from user input")
         elif cmd == '%':
             outputText.appendChar(chr(memory[currentMemCell]))

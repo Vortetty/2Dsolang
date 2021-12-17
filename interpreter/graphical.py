@@ -68,13 +68,13 @@ class textManager:
             )
         self.lines = self.lines[-self.height:]
         
-    def writeToDisplay(self, stdscr: _curses.window):
-        stdscr.clear()
+    def writeToDisplay(self, scr: _curses.window):
+        scr.erase()
         for y, line in enumerate(self.lines):
             for x, char in enumerate(line):
                 #print(x, y)
                 try:
-                    stdscr.addch(y, x, char)
+                    scr.addch(y, x, char)
                 except:
                     pass
             #stdscr.addstr(line[:self.width])
@@ -95,7 +95,7 @@ def main(stdscr: _curses.window, code, memCellCount, boardWidth, boardHeight, cp
     curses.use_default_colors()
     curses.delay_output(0)
     
-    stdscr.clear()
+    stdscr.erase()
     curses.resize_term((max(boardHeight, memCellCount)) + 2, boardWidth*2 + boardWidth*2+2 + 2 + 5)
     stdscr.box()
     stdscr.refresh()
@@ -168,7 +168,7 @@ def main(stdscr: _curses.window, code, memCellCount, boardWidth, boardHeight, cp
         codeHistoryContent.refresh()
         
     def clearAll():
-        #stdscr.clear()
+        #stdscr.erase()
         #codeBox.clear()
         #codeContent.clear()
         #memBox.clear()
