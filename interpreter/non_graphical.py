@@ -3,7 +3,7 @@ try:
     pyjion.config(level=2)
     pyjion.enable()
 except: pass
-from curses import wrapper
+from curses import nonl, wrapper
 import curses
 import _curses
 import enum
@@ -16,6 +16,7 @@ import traceback
 import os
 import sys
 import random
+from typing import SupportsIndex
 
 class DIRECTION(enum.Enum):
     UP = 0
@@ -24,19 +25,28 @@ class DIRECTION(enum.Enum):
     LEFT = 3
     
 class GrowingList(list):
-    def __init__(self, defaultItem, *args, **kwargs):
+    def __init__(self, defaultItem, defaultSize=0, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.defaultItem = defaultItem
+        self.extend([defaultItem] * defaultSize)
     
     def __setitem__(self, index, value):
-        if index >= len(self):
-            self.extend([self.defaultItem] * (index + 1 - len(self)))
-        list.__setitem__(self, index, value)
+        if type(index) is slice:
+            if index.start >= len(self) or index.stop >= len(self):
+                self.extend([self.defaultItem] * (max(index.start, index.stop) + 1 - len(self)))
+        else:
+            if index >= len(self):
+                self.extend([self.defaultItem] * (index + 1 - len(self)))
+        return super().__setitem__(index, value)
     
     def __getitem__(self, index):
-        if index >= len(self):
-            self.extend([self.defaultItem] * (index + 1 - len(self)))
-        return list.__getitem__(self, index)
+        if type(index) is slice:
+            if index.start >= len(self) or index.stop >= len(self):
+                self.extend([self.defaultItem] * (max(index.start, index.stop) + 1 - len(self)))
+        else:
+            if index >= len(self):
+                self.extend([self.defaultItem] * (index + 1 - len(self)))
+        return super().__getitem__(index)
     
     
 class Vec2:
@@ -100,7 +110,7 @@ def addToHistory(historyText: list, text: list):
         historyText.append(t)
     del historyText[:text.len()]
         
-def main(stdscr: _curses.window, code, memCellCount, boardWidth, boardHeight, cps):
+def main(stdscr: _curses.window, code, memCellCount, boardWidth, boardHeight, winSizeX, winSizeY, cps):
     global memory
     global pos
     global currentMemCell
@@ -112,24 +122,31 @@ def main(stdscr: _curses.window, code, memCellCount, boardWidth, boardHeight, cp
     curses.delay_output(0)
     
     stdscr.erase()
-    curses.resize_term(35, 133)
+    curses.resize_term(winSizeY, winSizeX)
     #stdscr.box()
-    stdscr.addstr(0, 0, "╷ Program output ╷")
-    stdscr.addstr(0, 67, "╷ Program log ╷")
+    stdscr.addstr(0, 0, "╷Program output╷")
+    stdscr.addstr(0, 66, "╷Mem╷")
+    stdscr.addstr(0, 124, "╷Program log╷")
     stdscr.refresh()
     stdscr.nodelay(False)
     outputBox = stdscr.derwin(34, 66, 1, 0)
     outputBox.box()
-    outputBox.addstr(0, 0, "├────────────────┴")
+    outputBox.addstr(0, 0, "├──────────────┴")
     outputBox.refresh()
     outputBox.nodelay(False)
-    codeHistoryBox = stdscr.derwin(34, 66, 1, 67)
+    memBox = stdscr.derwin(34, 5, 1, 66)
+    memBox.box()
+    memBox.addstr(0, 0, "├───┤")
+    memBox.refresh()
+    memBox.nodelay(False)
+    codeHistoryBox = stdscr.derwin(34, 66, 1, 71)
     codeHistoryBox.box()
-    codeHistoryBox.addstr(0, 0, "├─────────────┴")
+    codeHistoryBox.addstr(0, 53, "┴───────────┤")
     codeHistoryBox.refresh()
     codeHistoryBox.nodelay(False)
     
     outputContent = outputBox.derwin(32, 64, 1, 1)
+    memContent = memBox.derwin(32, 3, 1, 1)
     codeHistoryContent = codeHistoryBox.derwin(32, 64, 1, 1)
     
     outputContent.refresh()
@@ -140,17 +157,14 @@ def main(stdscr: _curses.window, code, memCellCount, boardWidth, boardHeight, cp
     
     outputText = textManager(outputContent.getmaxyx()[1], outputContent.getmaxyx()[0])
     historyText = textManager(codeHistoryContent.getmaxyx()[1], codeHistoryContent.getmaxyx()[0])
-    memory = [
-        0 for i in range(memCellCount)
-    ] if cps != -1 else GrowingList(0)
+    memory = GrowingList(0, 32)
     
     end = False
     pos = Vec2(0, 0)
     direction = DIRECTION.RIGHT
     currentMemCell = 0
-    commandsPerSecond = cps
     
-    curses.init_pair(2, curses.COLOR_RED, curses.COLOR_BLACK)
+    memoryCellRange = 0
     
     def updateOutputs():
         outputText.writeToDisplay(outputContent)
@@ -158,6 +172,22 @@ def main(stdscr: _curses.window, code, memCellCount, boardWidth, boardHeight, cp
         
         historyText.writeToDisplay(codeHistoryContent)
         codeHistoryContent.refresh()
+        
+    def updateMem():
+        nonlocal memoryCellRange
+        if currentMemCell > memoryCellRange+31:
+            memoryCellRange = currentMemCell-31
+        elif currentMemCell < memoryCellRange:
+            memoryCellRange = currentMemCell
+            
+        memoryCellRange = max(0, min(memoryCellRange, len(memory)-1))
+            
+        memContent.erase()
+        memContent.addstr(0, 1, "▲" if memoryCellRange > 0 else "△")
+        for y,i in enumerate(memory[memoryCellRange:memoryCellRange+30]):
+            memContent.addstr(y+1, 0, str(i).rjust(3), curses.A_REVERSE if y==currentMemCell else curses.A_NORMAL)
+        memContent.addstr(31, 1, "▼" if memoryCellRange+31 < len(memory) - 1 else "▽")
+        memContent.refresh()
         
     def clearAll():
         #stdscr.erase()
@@ -184,6 +214,7 @@ def main(stdscr: _curses.window, code, memCellCount, boardWidth, boardHeight, cp
     def reRender():
         #clearAll()
         updateOutputs()
+        updateMem()
         
     def scanForJumpForward():
         newDirection = direction
@@ -343,13 +374,13 @@ def main(stdscr: _curses.window, code, memCellCount, boardWidth, boardHeight, cp
             )
             historyText.newLine("Randomly set memory cell " + str(currentMemCell) + " to " + str(memory[currentMemCell]) + " with random number " + str(tmp) + "-" + str(tmp1))
         elif cmd == '/':
-            currentMemCell = (currentMemCell + 1) % memCellCount
+            currentMemCell = (currentMemCell + 1)
             historyText.newLine("Moved to memory cell " + str(currentMemCell))
         elif cmd == '\\':
-            currentMemCell = (currentMemCell - 1) % memCellCount
+            currentMemCell = (currentMemCell - 1)
             historyText.newLine("Moved to memory cell " + str(currentMemCell))
         elif cmd == '*':
-            currentMemCell = parseDigitsForward(3) % memCellCount
+            currentMemCell = parseDigitsForward(3)
             historyText.newLine("Moved to memory cell " + str(currentMemCell))
         elif cmd == '_':
             tmp = "Jumped from " + str(pos) + " to "
@@ -514,7 +545,7 @@ def main(stdscr: _curses.window, code, memCellCount, boardWidth, boardHeight, cp
             while code[pos.y][pos.x] != '"':
                 
                 memory[currentMemCell] = ord(code[pos.y][pos.x])
-                currentMemCell = (currentMemCell + 1) % memCellCount
+                currentMemCell = (currentMemCell + 1)
                         
                 if direction == DIRECTION.UP:
                         pos.y = (pos.y - 1) % boardHeight

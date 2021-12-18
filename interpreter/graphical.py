@@ -84,7 +84,7 @@ def addToHistory(historyText: list, text: list):
         historyText.append(t)
     del historyText[:text.len()]
         
-def main(stdscr: _curses.window, code, memCellCount, boardWidth, boardHeight, cps):
+def main(stdscr: _curses.window, code, memCellCount, boardWidth, boardHeight, winSizeX, winSizeY, cps):
     global memory
     global pos
     global currentMemCell
@@ -96,24 +96,33 @@ def main(stdscr: _curses.window, code, memCellCount, boardWidth, boardHeight, cp
     curses.delay_output(0)
     
     stdscr.erase()
-    curses.resize_term((max(boardHeight, memCellCount)) + 2, boardWidth*2 + boardWidth*2+2 + 2 + 5)
-    stdscr.box()
+    curses.resize_term(winSizeY, winSizeX)
+    stdscr.addstr(0, 0, "╷Code╷                                                            ╷Mem╷                                                  ╷Program output╷")
+    stdscr.addstr((max(boardHeight, memCellCount)) + 2 - 9 + 1, boardWidth*2+2+5, "┌────────────────────────────────────────────────────────────────┬────╴")
+    stdscr.addstr((max(boardHeight, memCellCount)) + 2 - 9 + 2, boardWidth*2+2+5, "│                                                                │ Log ")
+    stdscr.addstr((max(boardHeight, memCellCount)) + 2 - 9 + 3, boardWidth*2+2+5, "│                                                                ├────╴")
     stdscr.refresh()
     stdscr.nodelay(True)
-    codeBox = stdscr.derwin((max(boardHeight, memCellCount)) + 2, boardWidth*2+2, 0, 0)
+    codeBox = stdscr.derwin((max(boardHeight, memCellCount)) + 2, boardWidth*2+2, 1, 0)
     codeBox.box()
+    codeBox.addstr(0, 0, "├────┴───────────────────────────────────────────────────────────┐")
     codeBox.refresh()
     codeBox.nodelay(False)
-    memBox = stdscr.derwin((max(boardHeight, memCellCount)) + 2, 5, 0, boardWidth*2+2)
+    memBox = stdscr.derwin((max(boardHeight, memCellCount)) + 2, 5, 1, boardWidth*2+2)
     memBox.box()
+    memBox.addstr(0, 0, "├───┤")
     memBox.refresh()
     memBox.nodelay(False)
-    outputBox = stdscr.derwin((max(boardHeight, memCellCount)) + 2 - 9, 66, 0, boardWidth*2+2+5)
+    outputBox = stdscr.derwin((max(boardHeight, memCellCount)) + 2 - 9, 66, 1, boardWidth*2+2+5)
     outputBox.box()
+    outputBox.addstr(0, 0, "┌─────────────────────────────────────────────────┴──────────────┤")
     outputBox.refresh()
     outputBox.nodelay(False)
-    codeHistoryBox = stdscr.derwin(9, 66, (max(boardHeight, memCellCount)) + 2 - 9, boardWidth*2+2+5)
+    codeHistoryBox = stdscr.derwin(9, 66, (max(boardHeight, memCellCount)) + 2 - 9 + 1, boardWidth*2+2+5)
     codeHistoryBox.box()
+    codeHistoryBox.addstr(0, 0, "┌────────────────────────────────────────────────────────────────┬")
+    codeHistoryBox.addstr(1, 0, "│                                                                │")
+    codeHistoryBox.addstr(2, 0, "│                                                                ├")
     codeHistoryBox.refresh()
     codeHistoryBox.nodelay(False)
     
@@ -146,8 +155,6 @@ def main(stdscr: _curses.window, code, memCellCount, boardWidth, boardHeight, cp
     direction = DIRECTION.RIGHT
     currentMemCell = 0
     commandsPerSecond = cps
-    
-    curses.init_pair(2, curses.COLOR_RED, curses.COLOR_BLACK)
     
     def updateCode(jumping = False, highlights = [], cursors = []):
         for y,yi in enumerate(code):

@@ -42,12 +42,19 @@ try:
     boardWidth = args.width
     boardHeight = args.height
     main = None
+    
+    if args.no_text:
+        winSizeX = 133 + 5
+        winSizeY = 35
+    else:
+        winSizeX = boardWidth*2 + boardWidth*2+2 + 2 + 5 + 5
+        winSizeY = (max(boardHeight, memCellCount)) + 2 + 1
 
     if os.name == "nt":
         subprocess.run(f"title 2Dsolang Interpreter ({os.path.basename(args.file)}) ", shell=True)
     elif not args.no_kitty:
         subprocess.run(["kitty", "@", "set-window-title", f"2Dsolang Interpreter ({os.path.basename(args.file)})"])
-        subprocess.run(["kitty", "@", "resize-os-window", "--width", f"{boardWidth*2 + 66 + 2 + 5}", "--height", f"{(max(boardHeight, memCellCount) + 1) + 2}", "--self"])
+        subprocess.run(["kitty", "@", "resize-os-window", "--width", f"{winSizeX}", "--height", f"{winSizeY}", "--self"])
 
     if args.no_text:
         from interpreter import non_graphical
@@ -81,7 +88,7 @@ try:
     #print("`".join("".join(i) for i in source))
     #input()
 
-    wrapper(main, source, memCellCount, boardWidth, boardHeight, args.cps)
+    wrapper(main, source, memCellCount, boardWidth, boardHeight, winSizeX, winSizeY+1, args.cps)
     
 except Exception as e:
     print(traceback.format_exc())

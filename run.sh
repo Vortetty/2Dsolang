@@ -25,10 +25,10 @@ else
     echo "Kitty is already installed, not installing"
 fi
 
-if fc-list | grep -q -i "consolas:style=regular"; then
-    echo "Consolas already installed, not installing"
+if fc-list | grep -q -i "Consolas for Powerline:style=regular"; then
+    echo "Consolas for Powerline already installed, not installing"
 else
-    echo "Installing consolas"
+    echo "Installing Consolas for Powerline"
     mkdir ~/.local/share/fonts
     cp ./fonts/* ~/.local/share/fonts/
     echo "done"
@@ -45,9 +45,9 @@ DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )"
 
 kitty \
     -o allow_remote_control=yes \
-    -o initial_window_width=1241 \
+    -o initial_window_width=1281 \
     -o initial_window_height=625 \
-    -o font_family="Consolas Regular" \
+    -o font_family="Consolas for Powerline" \
     -o bold_font="auto" \
     -o italic_font="auto" \
     -o bold_italic_font="auto" \
