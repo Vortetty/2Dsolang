@@ -43,34 +43,30 @@ class Vec2:
 class textManager:
     def __init__(self, width, height, preInitialize=False):
         if preInitialize:
-            self.lines = [
-                " "*width for i in range(height)
+            self.full_lines = [
+                " "*width for i in range(height)
             ]
         else:
-            self.lines = []
+            self.full_lines = []
         self.width = width
         self.height = height
         
     def newLine(self, line):
         for x in line.split("\n"):
-            self.lines.extend(
-                i.ljust(self.width, " ").strip("\n") for i in textwrap.wrap(x, self.width, subsequent_indent=" ", replace_whitespace=False)
-            )
-        self.lines = self.lines[-self.height:]
-        
+            l = [i.ljust(self.width, " ").strip("\n") for i in textwrap.wrap(x, self.width, subsequent_indent=" ", replace_whitespace=False, drop_whitespace=False)]
+            self.full_lines.extend(l)
+    
     def appendChar(self, line):
         if line == "\n":
-            self.lines.append(" "*self.width)
+            self.full_lines.append(" "*self.width)
         else:
-            tmp = self.lines.pop(-1).strip(" ") if len(self.lines) > 0 else ""
-            self.lines.extend(
-                i.ljust(self.width, " ") for i in textwrap.wrap(tmp+line, self.width, subsequent_indent=" ", replace_whitespace=False)
-            )
-        self.lines = self.lines[-self.height:]
-        
+            tmp = self.full_lines.pop(-1).strip(" ") if len(self.full_lines) > 0 else ""
+            l = [i.ljust(self.width, " ").strip("\n") for i in textwrap.wrap(tmp+line, self.width, subsequent_indent=" ", replace_whitespace=False, drop_whitespace=False)]
+            self.full_lines.extend(l)
+    
     def writeToDisplay(self, scr: _curses.window):
         scr.erase()
-        for y, line in enumerate(self.lines):
+        for y, line in enumerate(self.full_lines[-self.height:]):
             for x, char in enumerate(line):
                 #print(x, y)
                 try:
@@ -78,6 +74,10 @@ class textManager:
                 except:
                     pass
             #stdscr.addstr(line[:self.width])
+    
+    def writeToFile(self, filename: str):
+        with open(filename, "w") as f:
+            f.writelines(self.full_lines)
         
 def addToHistory(historyText: list, text: list):
     for t in text:
@@ -603,27 +603,59 @@ def main(stdscr: _curses.window, code, memCellCount, boardWidth, boardHeight, wi
         elif cmd == 'w':
             historyText.newLine("Entered write to console mode")
             if direction == DIRECTION.UP:
-                    pos.y = (pos.y - 1) % boardHeight
+                pos.y = (pos.y - 1) % boardHeight
             elif direction == DIRECTION.DOWN:
-                    pos.y = (pos.y + 1) % boardHeight
+                pos.y = (pos.y + 1) % boardHeight
             elif direction == DIRECTION.LEFT:
-                    pos.x = (pos.x - 1) % boardWidth
+                pos.x = (pos.x - 1) % boardWidth
             elif direction == DIRECTION.RIGHT:
+                pos.x = (pos.x + 1) % boardWidth
+                    
+            if code[pos.y][pos.x] == '\\':
+                if direction == DIRECTION.UP:
+                    pos.y = (pos.y - 1) % boardHeight
+                elif direction == DIRECTION.DOWN:
+                    pos.y = (pos.y + 1) % boardHeight
+                elif direction == DIRECTION.LEFT:
+                    pos.x = (pos.x - 1) % boardWidth
+                elif direction == DIRECTION.RIGHT:
                     pos.x = (pos.x + 1) % boardWidth
+                    
+            outputText.appendChar(code[pos.y][pos.x])
+                    
+            if direction == DIRECTION.UP:
+                pos.y = (pos.y - 1) % boardHeight
+            elif direction == DIRECTION.DOWN:
+                pos.y = (pos.y + 1) % boardHeight
+            elif direction == DIRECTION.LEFT:
+                pos.x = (pos.x - 1) % boardWidth
+            elif direction == DIRECTION.RIGHT:
+                pos.x = (pos.x + 1) % boardWidth
+                
                     
             while code[pos.y][pos.x] != 'w':
                 start_time = time.time()
                 
+                if code[pos.y][pos.x] == '\\':
+                    if direction == DIRECTION.UP:
+                        pos.y = (pos.y - 1) % boardHeight
+                    elif direction == DIRECTION.DOWN:
+                        pos.y = (pos.y + 1) % boardHeight
+                    elif direction == DIRECTION.LEFT:
+                        pos.x = (pos.x - 1) % boardWidth
+                    elif direction == DIRECTION.RIGHT:
+                        pos.x = (pos.x + 1) % boardWidth
+                    
                 outputText.appendChar(code[pos.y][pos.x])
                         
                 if direction == DIRECTION.UP:
-                        pos.y = (pos.y - 1) % boardHeight
+                    pos.y = (pos.y - 1) % boardHeight
                 elif direction == DIRECTION.DOWN:
-                        pos.y = (pos.y + 1) % boardHeight
+                    pos.y = (pos.y + 1) % boardHeight
                 elif direction == DIRECTION.LEFT:
-                        pos.x = (pos.x - 1) % boardWidth
+                    pos.x = (pos.x - 1) % boardWidth
                 elif direction == DIRECTION.RIGHT:
-                        pos.x = (pos.x + 1) % boardWidth
+                    pos.x = (pos.x + 1) % boardWidth
                     
                 reRender(True)
                     

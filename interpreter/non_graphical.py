@@ -560,26 +560,58 @@ def main(stdscr: _curses.window, code, memCellCount, boardWidth, boardHeight, wi
         elif cmd == 'w':
             historyText.newLine("Entered write to console mode")
             if direction == DIRECTION.UP:
-                    pos.y = (pos.y - 1) % boardHeight
+                pos.y = (pos.y - 1) % boardHeight
             elif direction == DIRECTION.DOWN:
-                    pos.y = (pos.y + 1) % boardHeight
+                pos.y = (pos.y + 1) % boardHeight
             elif direction == DIRECTION.LEFT:
-                    pos.x = (pos.x - 1) % boardWidth
+                pos.x = (pos.x - 1) % boardWidth
             elif direction == DIRECTION.RIGHT:
+                pos.x = (pos.x + 1) % boardWidth
+                    
+            if code[pos.y][pos.x] == '\\':
+                if direction == DIRECTION.UP:
+                    pos.y = (pos.y - 1) % boardHeight
+                elif direction == DIRECTION.DOWN:
+                    pos.y = (pos.y + 1) % boardHeight
+                elif direction == DIRECTION.LEFT:
+                    pos.x = (pos.x - 1) % boardWidth
+                elif direction == DIRECTION.RIGHT:
                     pos.x = (pos.x + 1) % boardWidth
+                    
+            outputText.appendChar(code[pos.y][pos.x])
+                    
+            if direction == DIRECTION.UP:
+                pos.y = (pos.y - 1) % boardHeight
+            elif direction == DIRECTION.DOWN:
+                pos.y = (pos.y + 1) % boardHeight
+            elif direction == DIRECTION.LEFT:
+                pos.x = (pos.x - 1) % boardWidth
+            elif direction == DIRECTION.RIGHT:
+                pos.x = (pos.x + 1) % boardWidth
+                
                     
             while code[pos.y][pos.x] != 'w':
                 
+                if code[pos.y][pos.x] == '\\':
+                    if direction == DIRECTION.UP:
+                        pos.y = (pos.y - 1) % boardHeight
+                    elif direction == DIRECTION.DOWN:
+                        pos.y = (pos.y + 1) % boardHeight
+                    elif direction == DIRECTION.LEFT:
+                        pos.x = (pos.x - 1) % boardWidth
+                    elif direction == DIRECTION.RIGHT:
+                        pos.x = (pos.x + 1) % boardWidth
+                    
                 outputText.appendChar(code[pos.y][pos.x])
                         
                 if direction == DIRECTION.UP:
-                        pos.y = (pos.y - 1) % boardHeight
+                    pos.y = (pos.y - 1) % boardHeight
                 elif direction == DIRECTION.DOWN:
-                        pos.y = (pos.y + 1) % boardHeight
+                    pos.y = (pos.y + 1) % boardHeight
                 elif direction == DIRECTION.LEFT:
-                        pos.x = (pos.x - 1) % boardWidth
+                    pos.x = (pos.x - 1) % boardWidth
                 elif direction == DIRECTION.RIGHT:
-                        pos.x = (pos.x + 1) % boardWidth
+                    pos.x = (pos.x + 1) % boardWidth
                     
             historyText.newLine("Exited write to console mode")
                     
